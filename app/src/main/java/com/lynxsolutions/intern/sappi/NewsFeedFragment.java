@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 public class NewsFeedFragment extends Fragment {
 
 
+
     public NewsFeedFragment() {
         // Required empty public constructor
     }
