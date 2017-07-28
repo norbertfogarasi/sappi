@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Sappi</string>
+    <string name="facebook_app_id">1939622226317800</string>
+
+    <!-- LoginActivity -->
+    <string name="et_email_hint">E-MAIL</string>
+    <string name="et_password_hint">PASSWORD</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="tv_create_account">Don\'t have an account? REGISTER</string>
+    <string name="tv_forgot_password">FORGOT YOUR PASSWORD?</string>
+
+    <!-- RegisterActivity -->
+    <string name="label_register">REGISTER</string>
+    <string name="et_name_hint">NAME</string>
+    <string name="et_password_confirm_hint">CONFIRM PASSWORD</string>
+    <string name="et_phone_hint">PHONE NUMBER *</string>
+    <string name="label_required">* required to submit car announcement</string>
+
+    <string name="et_email_error">E-mail required</string>
+    <string name="et_password_error">Password required</string>
+    <string name="et_name_error">Name required</string>
+    <string name="et_password_confirm_error">Confirm your password</string>
+    <string name="et_password_dont_match">Passwords don\'t match</string>
+    <string name="et_no_user">No user with this e-mail address</string>
+    <string name="et_invalid_email_or_password">Invalid e-mail or password</string>
+    <string name="et_user_exists">User already exists with this e-mail address</string>
+    <string name="et_password_too_weak">The chosen password is too weak</string>
+
+    <!-- ForgotPasswordActivity -->
+    <string name="label_forgot_password">FORGOT PASSWORD</string>
+    <string name="btn_send">SEND</string>
+    <string name="tv_back">BACK</string>
+    <string name="toast_email_sent">Email sent!</string>
+    <string name="logo">Logo</string>
+
+    <string name="going_txt">Going</string>
+    <string name="added_by">Added by</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

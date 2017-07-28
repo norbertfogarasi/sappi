@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "856707857749",
+    "firebase_url": "https://sappi-ccc6a.firebaseio.com",
+    "project_id": "sappi-ccc6a",
+    "storage_bucket": "sappi-ccc6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856707857749:android:6b9e2b57a11f62b3",
+        "android_client_info": {
+          "package_name": "com.lynxsolutions.intern.sappi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856707857749-9qaen55s89s7mrr43m89gnegs16663e6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lynxsolutions.intern.sappi",
+            "certificate_hash": "42b2cf6db59cb8d7cf5066334a73a227668d32f0"
+          }
+        },
+        {
+          "client_id": "856707857749-cqdqjhovtpjtmt4f7sh11kl2j1mpnk6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu5NoxtjTiA4sGLIIguqtAiAZs_wN65UY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856707857749-cqdqjhovtpjtmt4f7sh11kl2j1mpnk6p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="et_width">270dp</dimen>
+    <dimen name="tv_text_size">20sp</dimen>
+    <dimen name="space_under_edittext">25dp</dimen>
+    <dimen name="space_under_views">10dp</dimen>
+    <dimen name="app_padding">15dp</dimen>
+    <dimen name="et_hint_size">15sp</dimen>
+    <dimen name="dim_going">30sp</dimen>
+    <dimen name="locations_dim">20sp</dimen>
+    <dimen name="locations_margin_dim">5dp</dimen>
+</resources>
