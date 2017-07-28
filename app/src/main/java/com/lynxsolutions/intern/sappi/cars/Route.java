@@ -4,17 +4,17 @@ package com.lynxsolutions.intern.sappi.cars;
  * Created by szabohunor on 27.07.2017.
  */
 
-public class CarRoute {
-    String from;
-    String to;
-    String from_to;
-    String description;
-    String phonenumber;
-    String uid;
-    String date;
-    String username;
+public class Route {
+    private String from;
+    private String to;
+    private String from_to;
+    private String description;
+    private String phonenumber;
+    private String uid;
+    private String date;
+    private String username;
 
-    public CarRoute(String from, String to, String from_to, String description, String phonenumber, String uid, String date,String username) {
+    public Route(String from, String to, String from_to, String description, String phonenumber, String uid, String date, String username) {
         this.from = from;
         this.to = to;
         this.from_to = from_to;
@@ -22,7 +22,7 @@ public class CarRoute {
         this.phonenumber = phonenumber;
         this.uid = uid;
         this.date = date;
-        this.username=username;
+        this.username = username;
     }
 
     public String getUsername() {
@@ -33,8 +33,7 @@ public class CarRoute {
         this.username = username;
     }
 
-    public CarRoute()
-    {};
+    public Route() {}
 
     public String getFrom() {
         return from;
