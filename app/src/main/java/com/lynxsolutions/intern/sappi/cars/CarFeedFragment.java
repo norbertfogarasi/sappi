@@ -1,11 +1,10 @@
-package com.lynxsolutions.intern.sappi;
+package com.lynxsolutions.intern.sappi.cars;
 
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.lynxsolutions.intern.sappi.R;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CarFeedFragment extends Fragment{
+public class CarFeedFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ArrayList<CarRoute> list;
@@ -139,5 +139,5 @@ public class CarFeedFragment extends Fragment{
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-    */
+   */
 }

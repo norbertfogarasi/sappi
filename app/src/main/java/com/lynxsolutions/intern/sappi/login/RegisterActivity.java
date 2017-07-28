@@ -1,4 +1,4 @@
-package com.lynxsolutions.intern.sappi;
+package com.lynxsolutions.intern.sappi.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.lynxsolutions.intern.sappi.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

@@ -1,24 +1,24 @@
-package com.lynxsolutions.intern.sappi;
+package com.lynxsolutions.intern.sappi.events;
 
 /**
  * Created by szabohunor on 25.07.2017.
  */
 
-public class Post {
+public class Event {
     private String imageUrl;
     private String date;
     private String title;
     private String UID;
     private String description;
 
-    public Post(String imageUrl, String date, String title, String UID, String description) {
+    public Event(String imageUrl, String date, String title, String UID, String description) {
         this.imageUrl = imageUrl;
         this.date = date;
         this.title = title;
         this.UID = UID;
         this.description = description;
     }
-    public Post()
+    public Event()
     {};
 
     public String getImageUrl() {

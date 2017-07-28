@@ -1,4 +1,4 @@
-package com.lynxsolutions.intern.sappi;
+package com.lynxsolutions.intern.sappi.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.login.LoginActivity;
 
 public class SplashScreenActivity extends AppCompatActivity{
 

@@ -1,4 +1,4 @@
-package com.lynxsolutions.intern.sappi;
+package com.lynxsolutions.intern.sappi.cars;
 
 /**
  * Created by szabohunor on 27.07.2017.

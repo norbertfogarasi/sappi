@@ -1,4 +1,4 @@
-package com.lynxsolutions.intern.sappi;
+package com.lynxsolutions.intern.sappi.events;
 
 
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.lynxsolutions.intern.sappi.R;
 
 
 /**
@@ -25,7 +26,7 @@ import com.google.firebase.storage.StorageReference;
  */
 public class EventFeedFragment extends Fragment {
     private RecyclerView mPostRV;
-    private FirebaseRecyclerAdapter<Post, PostViewHolder> mPostAdapter;
+    private FirebaseRecyclerAdapter<Event, PostViewHolder> mPostAdapter;
     private DatabaseReference mPostRef;
 
     public EventFeedFragment() {
@@ -75,24 +76,24 @@ public class EventFeedFragment extends Fragment {
 
         String UID = "5634t5erfgsdg";
 
-        Post p=new Post("gs://sappi-ccc6a.appspot.com/flickr Bőr Benedek.jpg","AUG\n11-16","Sziget Fesztival",
+        Event p=new Event("gs://sappi-ccc6a.appspot.com/flickr Bőr Benedek.jpg","AUG\n11-16","Sziget Fesztival",
                 UID,"sziget sziget sdfsdfsdfsd.......");
-        Post post = new Post("gs://testproject1-e5b8d.appspot.com/TT20100723_204.jpg",
+        Event post = new Event("gs://testproject1-e5b8d.appspot.com/TT20100723_204.jpg",
                 "JUN\n22-23","Tusvanyos",UID,"blablablablabla................");
 
         mPostRef.child(Long.toString(System.currentTimeMillis())).setValue(p);
     }
 
     private void setupAdapter() {
-        mPostAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(
-                Post.class,
+        mPostAdapter = new FirebaseRecyclerAdapter<Event, PostViewHolder>(
+                Event.class,
                 R.layout.item_layout_post,
                 PostViewHolder.class,
                 mPostRef
         ) {
 
             @Override
-            protected void populateViewHolder(PostViewHolder viewHolder, final Post model, int position) {
+            protected void populateViewHolder(PostViewHolder viewHolder, final Event model, int position) {
 
                 StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(model.getImageUrl());
                 Glide.with(getContext())

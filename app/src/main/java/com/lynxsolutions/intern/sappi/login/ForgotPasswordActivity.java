@@ -1,4 +1,4 @@
-package com.lynxsolutions.intern.sappi;
+package com.lynxsolutions.intern.sappi.login;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.lynxsolutions.intern.sappi.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
