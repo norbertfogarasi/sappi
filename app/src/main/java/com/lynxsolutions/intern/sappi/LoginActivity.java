@@ -1,19 +1,24 @@
 package com.lynxsolutions.intern.sappi;
 
 import android.content.Intent;
+import android.icu.text.LocaleDisplayNames;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
+    private int progressStatus = 1;
 
     private EditText mEditTextEmail, mEditTextPassword;
     private Button mLoginButton;
@@ -54,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleApiClient mGoogleApiClient;
     private CallbackManager mCallbackManager;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void initViews() {
         //Initializes the views and sets up the listeners
         tvRegister = (TextView) findViewById(R.id.tvRegister);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
         //Color the textview
         final SpannableStringBuilder sb = new SpannableStringBuilder(tvRegister.getText().toString());
         final ForegroundColorSpan fcs = new ForegroundColorSpan(ContextCompat.getColor(this, R.color.colorPrimary));
@@ -130,34 +138,92 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mEditTextEmail = (EditText) findViewById(R.id.etEmail);
         mEditTextPassword = (EditText) findViewById(R.id.etPassword);
 
+        //Logiv via email and password
         mLoginButton = (Button) findViewById(R.id.btnLogIn);
                 mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validFields()) {
-                    mAuth.signInWithEmailAndPassword(mEditTextEmail.getText().toString(), mEditTextPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setMax(100);
+                    new AsyncTask<Void, Integer, Void>() {
+
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "signInWithEmailAndPassword: success");
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                finish();
-                            } else {
-                                Log.d(TAG, "signInWithEmailAndPassword: failure");
+                        protected Void doInBackground(final Void... params) {
+
+                            // Do your loading here. Don't touch any views from here, and then return null
+//                            mAuth.signInWithEmailAndPassword(mEditTextEmail.getText().toString(), mEditTextPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<AuthResult> task) {
+//                                    if (task.isSuccessful()) {
+//                                        Log.d(TAG, "signInWithEmailAndPassword: success");
+//                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                                        finish();
+//                                    } else {
+//                                        Log.d(TAG, "signInWithEmailAndPassword: failure");
+//                                    }
+//                                }
+//                            }).addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    if (e instanceof FirebaseAuthInvalidUserException) {
+//                                        mEditTextEmail.setError(getString(R.string.et_no_user));
+//                                    }
+//                                    if (e instanceof FirebaseAuthInvalidCredentialsException) {
+//                                        mEditTextEmail.setError(getString(R.string.et_invalid_email_or_password));
+//                                        mEditTextPassword.setError(getString(R.string.et_invalid_email_or_password));
+//                                    }
+//                                }
+//                            });
+
+                            firebaseAuthWithEmailAndPassword();
+                            publishProgress(25, 50, 75, 100);
+
+
+
+//                            mAuth.signInWithCredential(credential)
+//                                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<AuthResult> task) {
+//                                            if (task.isSuccessful()) {
+//                                                // Sign in success, update UI with the signed-in user's information
+//                                                Log.d(TAG, "signInWithCredential:success");
+//                                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                                                finish();
+//                                            } else {
+//                                                // If sign in fails, display a message to the user.
+//                                                Log.w(TAG, "signInWithCredential:failure", task.getException());
+//                                                Snackbar snackbar = Snackbar.make(findViewById(R.id.login_container),
+//                                                        R.string.err_failed_to_log_in, Snackbar.LENGTH_LONG);
+//                                                snackbar.show();
+//                                            }
+//                                        }
+//                                    });
+                            return null;
+                        }
+                        @Override
+                        protected void onPostExecute(final Void result){
+                            // Update your views here
+//                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+
+//                        private void onProgressUpdate(Integer... values) {
+//                                //progressBar.incrementProgressBy(1);
+//                                progressBar.setProgress(values[0]);
+//                                //progressStatus++;
+//                           // progressBar.incrementProgressBy(1);
+//                        }
+
+
+                        @Override
+                        protected void onProgressUpdate(Integer... values) {
+                            //super.onProgressUpdate(values);
+                            for(int i = 0; i < values.length; i++) {
+                                progressBar.setProgress(values[i]);
+                                Log.d("onProgressUpdate", values[i].toString());
                             }
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            if(e instanceof FirebaseAuthInvalidUserException) {
-                                mEditTextEmail.setError(getString(R.string.et_no_user));
-                            }
-                            if(e instanceof FirebaseAuthInvalidCredentialsException) {
-                                mEditTextEmail.setError(getString(R.string.et_invalid_email_or_password));
-                                mEditTextPassword.setError(getString(R.string.et_invalid_email_or_password));
-                            }
-                        }
-                    });
+                    }.execute();
                 }
             }
         });
@@ -229,10 +295,37 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         return valid;
     }
 
-    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
 
-//        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.pbSignIn);
-//        progressBar.setVisibility(View.VISIBLE);
+    private boolean firebaseAuthWithEmailAndPassword() {
+        mAuth.signInWithEmailAndPassword(mEditTextEmail.getText().toString(), mEditTextPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "signInWithEmailAndPassword: success");
+                    progressBar.setVisibility(View.INVISIBLE);
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                } else {
+                    Log.d(TAG, "signInWithEmailAndPassword: failure");
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if (e instanceof FirebaseAuthInvalidUserException) {
+                    mEditTextEmail.setError(getString(R.string.et_no_user));
+                }
+                if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                    mEditTextEmail.setError(getString(R.string.et_invalid_email_or_password));
+                    mEditTextPassword.setError(getString(R.string.et_invalid_email_or_password));
+                }
+            }
+        });
+        return true;
+    }
+
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
+        progressBar.setVisibility(View.VISIBLE);
         new AsyncTask<Void,Void,Void>(){
 
             @Override
@@ -248,14 +341,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithCredential:success");
-                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                     finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "signInWithCredential:failure", task.getException());
-                                    //TODO - Use a snackbar
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    Snackbar snackbar = Snackbar.make(findViewById(R.id.login_container),
+                                            R.string.err_failed_to_log_in, Snackbar.LENGTH_LONG);
+                                    snackbar.show();
                                 }
                             }
                         });
@@ -266,7 +358,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             protected void onPostExecute(final Void result){
                 // Update your views here
-                //progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         }.execute();
     }
@@ -292,9 +384,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            //TODO - use snackbar instead of Toast
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Snackbar snackbar = Snackbar.make(findViewById(R.id.login_container),
+                                    R.string.err_failed_to_log_in, Snackbar.LENGTH_LONG);
+                            snackbar.show();
                         }
                     }
                 });
