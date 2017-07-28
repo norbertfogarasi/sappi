@@ -108,6 +108,7 @@ public class CarFeedFragment extends Fragment{
         setupAdapter();
         mPostRV.setAdapter(mPostAdapter);
 
+
         //initialiseScreen();
         sendPostToFirebase();
         /*
