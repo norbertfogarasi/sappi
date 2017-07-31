@@ -3,7 +3,6 @@ package com.lynxsolutions.intern.sappi.cars;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
 import com.lynxsolutions.intern.sappi.R;
 
 /**
@@ -18,7 +17,6 @@ class RouteViewHolder extends RecyclerView.ViewHolder {
 
     public RouteViewHolder(View itemView) {
         super(itemView);
-
         tvFrom = itemView.findViewById(R.id.from_tv);
         tvUsername = itemView.findViewById(R.id.username_tv);
         tvTo = itemView.findViewById(R.id.to_tv);
@@ -29,4 +27,5 @@ class RouteViewHolder extends RecyclerView.ViewHolder {
         tvTo.setText(route.getTo());
         tvUsername.setText(route.getUsername());
     }
+
 }
