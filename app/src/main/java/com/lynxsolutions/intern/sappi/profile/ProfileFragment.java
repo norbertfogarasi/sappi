@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.cars.NavigationManager;
 import com.lynxsolutions.intern.sappi.main.MainActivity;
 
 /**
@@ -36,6 +37,7 @@ public class ProfileFragment extends Fragment {
     private ImageView profilePicture;
     Button editProfileButton;
     TextView emailText,phoneText,facebookText,nameText;
+    private NavigationManager manager;
 
 
     public ProfileFragment() {
@@ -82,13 +84,13 @@ public class ProfileFragment extends Fragment {
         phoneText = view.findViewById(R.id.mobile_text);
         facebookText = view.findViewById(R.id.facebook_text);
         editProfileButton = view.findViewById(R.id.edit_profile_button);
+        manager = new NavigationManager(getFragmentManager());
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).switchToFragment(new EditProfileFragment());
+                manager.switchToFragment(new EditProfileFragment());
             }
         });
     }
-
 
 }

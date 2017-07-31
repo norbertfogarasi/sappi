@@ -1,4 +1,4 @@
-package com.lynxsolutions.intern.sappi.events;
+package com.lynxsolutions.intern.sappi.cars;
 
 
 import android.os.Bundle;
@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 
 import com.lynxsolutions.intern.sappi.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailedFragment extends Fragment {
+
+public class AddRouteFragment extends Fragment {
 
 
-    public DetailedFragment() {
+    public AddRouteFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +25,7 @@ public class DetailedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detailed, container, false);
+        return inflater.inflate(R.layout.fragment_add_route, container, false);
     }
 
 }

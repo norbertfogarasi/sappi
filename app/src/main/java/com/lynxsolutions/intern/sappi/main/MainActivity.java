@@ -16,8 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.cars.CarFeedFragment;
+import com.lynxsolutions.intern.sappi.cars.NavigationManager;
 import com.lynxsolutions.intern.sappi.events.EventFeedFragment;
 import com.lynxsolutions.intern.sappi.login.LoginActivity;
 import com.lynxsolutions.intern.sappi.news.NewsFeedFragment;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     private ImageView bgImage, profileImage;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
+    private NavigationManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +58,11 @@ public class MainActivity extends AppCompatActivity
         profileImage = (ImageView) findViewById(R.id.profile_photo);
 
 
+        manager = new NavigationManager(getSupportFragmentManager());
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.main_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        switchToFragment(new NewsFeedFragment());
+        manager.switchToFragment(new NewsFeedFragment());
 
         /*FirebaseAuth.getInstance().signInWithEmailAndPassword("kalmy07@yahoo.com", "123456")
                 .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
@@ -75,14 +80,6 @@ public class MainActivity extends AppCompatActivity
 */
     }
 
-    public void switchToFragment(Fragment fragment) {
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.content, fragment).commit();
-    }
-
-
-
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -90,13 +87,13 @@ public class MainActivity extends AppCompatActivity
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    switchToFragment(new NewsFeedFragment());
+                    manager.switchToFragment(new NewsFeedFragment());
                     return true;
                 case R.id.navigation_cars:
-                    switchToFragment(new CarFeedFragment());
+                    manager.switchToFragment(new CarFeedFragment());
                     return true;
                 case R.id.navigation_events:
-                    switchToFragment(new EventFeedFragment());
+                    manager.switchToFragment(new EventFeedFragment());
                     return true;
             }
             return false;
@@ -122,9 +119,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {//for testing purpose
-            switchToFragment(new ProfileFragment());
+            manager.switchToFragment(new ProfileFragment());
         } else if (id == R.id.nav_favorites) {
-            switchToFragment(new FavoritesFragment());
+            manager.switchToFragment(new FavoritesFragment());
         } else if (id == R.id.nav_signout) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -139,7 +136,7 @@ public class MainActivity extends AppCompatActivity
     public void setActionBarTitle(String title){
         getSupportActionBar().setTitle(title);
     }
-/*
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -150,6 +147,6 @@ public class MainActivity extends AppCompatActivity
             finish();
         }
     }
-*/
+
 }
 
