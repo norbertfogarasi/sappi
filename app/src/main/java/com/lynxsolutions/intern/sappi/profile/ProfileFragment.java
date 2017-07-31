@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.cars.NavigationManager;
 import com.lynxsolutions.intern.sappi.main.MainActivity;
 
 /**
@@ -33,9 +34,12 @@ import com.lynxsolutions.intern.sappi.main.MainActivity;
  */
 public class ProfileFragment extends Fragment {
 
+    private static final String TAG = ProfileFragment.class.getSimpleName();
+
     private ImageView profilePicture;
     Button editProfileButton;
     TextView emailText,phoneText,facebookText,nameText;
+    private NavigationManager manager;
 
 
     public ProfileFragment() {
@@ -59,8 +63,18 @@ public class ProfileFragment extends Fragment {
         reToUser.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user == null) {
+                    Log.d(TAG, "onDataChange: null");
+                }
+                else {
+                    Log.d(TAG, "onDataChange: not null");
+                    Log.d(TAG, "onDataChange: name" + user.getDisplayName());
+                }
                 UserInfo info = dataSnapshot.getValue(UserInfo.class);
+                Log.d(TAG, "onDataChange: name " + info.getName());
                 nameText.setText(info.getName());
+                Log.d(TAG, "onDataChange: email " + info.getEmail());
                 emailText.setText(info.getEmail());
                 phoneText.setText(info.getPhonenumber());
                 Glide.with(getContext()).load(info.getPhoto()).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
@@ -82,13 +96,13 @@ public class ProfileFragment extends Fragment {
         phoneText = view.findViewById(R.id.mobile_text);
         facebookText = view.findViewById(R.id.facebook_text);
         editProfileButton = view.findViewById(R.id.edit_profile_button);
+        manager = new NavigationManager(getFragmentManager());
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).switchToFragment(new EditProfileFragment());
+                manager.switchToFragment(new EditProfileFragment());
             }
         });
     }
-
 
 }
