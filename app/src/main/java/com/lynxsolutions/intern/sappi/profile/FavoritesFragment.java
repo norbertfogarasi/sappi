@@ -1,4 +1,4 @@
-package com.lynxsolutions.intern.sappi.news;
+package com.lynxsolutions.intern.sappi.profile;
 
 
 import android.os.Bundle;
@@ -9,15 +9,13 @@ import android.view.ViewGroup;
 
 import com.lynxsolutions.intern.sappi.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFeedFragment extends Fragment {
+public class FavoritesFragment extends Fragment {
 
 
-
-    public NewsFeedFragment() {
+    public FavoritesFragment() {
         // Required empty public constructor
     }
 
@@ -26,8 +24,7 @@ public class NewsFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().setTitle("News Feed");
-        return inflater.inflate(R.layout.fragment_news_feed, container, false);
+        return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 
 }

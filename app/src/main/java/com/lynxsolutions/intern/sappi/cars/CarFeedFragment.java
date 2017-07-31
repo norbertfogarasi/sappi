@@ -34,7 +34,14 @@ public class CarFeedFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mAdapter.cleanup();
+    }
+
     private void initializeScreen(View view) {
+        getActivity().setTitle("Car Feed");
         mRecyclerView = view.findViewById(R.id.recycler_view2);
         mPostRef = FirebaseDatabase.getInstance().getReference("cars");
 

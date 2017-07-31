@@ -1,32 +1,28 @@
 package com.lynxsolutions.intern.sappi.main;
 
-
-
-
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.cars.CarFeedFragment;
 import com.lynxsolutions.intern.sappi.events.EventFeedFragment;
+import com.lynxsolutions.intern.sappi.login.LoginActivity;
 import com.lynxsolutions.intern.sappi.news.NewsFeedFragment;
-import com.lynxsolutions.intern.sappi.profile.FavoritesActivity;
-import com.lynxsolutions.intern.sappi.profile.ProfileActivity;
-import com.lynxsolutions.intern.sappi.R;
-
+import com.lynxsolutions.intern.sappi.profile.FavoritesFragment;
+import com.lynxsolutions.intern.sappi.profile.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,6 +59,20 @@ public class MainActivity extends AppCompatActivity
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         switchToFragment(new NewsFeedFragment());
 
+        /*FirebaseAuth.getInstance().signInWithEmailAndPassword("kalmy07@yahoo.com", "123456")
+                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("Szevasz", "signInWithEmail:onComplete:" + task.isSuccessful());
+                        if (!task.isSuccessful()) {
+                            Log.w("Szevasz", "signInWithEmail:failed", task.getException());
+                        }
+
+                        // ...
+                    }
+                });
+
+*/
     }
 
     public void switchToFragment(Fragment fragment) {
@@ -112,12 +122,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {//for testing purpose
-            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-            startActivity(intent);
+            switchToFragment(new ProfileFragment());
         } else if (id == R.id.nav_favorites) {
-            startActivity(new Intent(MainActivity.this, FavoritesActivity.class));
+            switchToFragment(new FavoritesFragment());
         } else if (id == R.id.nav_signout) {
-
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
