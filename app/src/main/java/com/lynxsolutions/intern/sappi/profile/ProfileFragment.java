@@ -33,6 +33,8 @@ import com.lynxsolutions.intern.sappi.main.MainActivity;
  */
 public class ProfileFragment extends Fragment {
 
+    private static final String TAG = ProfileFragment.class.getSimpleName();
+
     private ImageView profilePicture;
     Button editProfileButton;
     TextView emailText,phoneText,facebookText,nameText;
@@ -59,8 +61,18 @@ public class ProfileFragment extends Fragment {
         reToUser.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user == null) {
+                    Log.d(TAG, "onDataChange: null");
+                }
+                else {
+                    Log.d(TAG, "onDataChange: not null");
+                    Log.d(TAG, "onDataChange: name" + user.getDisplayName());
+                }
                 UserInfo info = dataSnapshot.getValue(UserInfo.class);
+                Log.d(TAG, "onDataChange: name " + info.getName());
                 nameText.setText(info.getName());
+                Log.d(TAG, "onDataChange: email " + info.getEmail());
                 emailText.setText(info.getEmail());
                 phoneText.setText(info.getPhonenumber());
                 Glide.with(getContext()).load(info.getPhoto()).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()

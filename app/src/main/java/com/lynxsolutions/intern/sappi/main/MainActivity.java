@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.cars.CarFeedFragment;
 import com.lynxsolutions.intern.sappi.events.EventFeedFragment;
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity
     public void setActionBarTitle(String title){
         getSupportActionBar().setTitle(title);
     }
-/*
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -150,6 +151,6 @@ public class MainActivity extends AppCompatActivity
             finish();
         }
     }
-*/
+
 }
 
