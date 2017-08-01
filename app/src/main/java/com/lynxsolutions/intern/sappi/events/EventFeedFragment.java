@@ -47,7 +47,7 @@ public class EventFeedFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
         mPostRV.setLayoutManager(layoutManager);
         mPostRef = FirebaseDatabase.getInstance().getReference("events");
-        sendPostToFirebase();
+        //sendPostToFirebase();
         setupAdapter();
         mPostRV.setAdapter(mPostAdapter);
         return view;

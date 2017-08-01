@@ -30,6 +30,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.main.MainActivity;
+
 import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +57,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle("Edit Profile");
         mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
@@ -81,6 +84,8 @@ public class EditProfileFragment extends Fragment {
 
     private void editProfileIfButtonPressed(){
 
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String userId = user.getUid();
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,14 +93,12 @@ public class EditProfileFragment extends Fragment {
                 if(filePath != null){
 
                     final String photoUri;
-                    StorageReference picsRef = mStorageRef.child("profilePictures/dog.jpg");
+                    StorageReference picsRef = mStorageRef.child("profilePictures/" + userId);
                     picsRef.putFile(filePath)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     final Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    final String userId = user.getUid();
                                     refToUser.child(userId).addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -125,6 +128,28 @@ public class EditProfileFragment extends Fragment {
                                 }
                             });
 
+                }
+                else{
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    final String userId = user.getUid();
+                    refToUser.child(userId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            UserInfo info = dataSnapshot.getValue(UserInfo.class);
+                            Log.e("Request_Data",info.getName());
+                            String name = nameText.getText().toString();
+                            String email = emailText.getText().toString();
+                            String phone = phoneText.getText().toString();
+                            //Here we make sure the realtime database is changed only if there is any change in data
+                            //refToUser.child(userId).child("name").setValue(name);
+                            setIfeverythingIsCorrect(name,email,phone,info,info.getPhoto(),userId);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.e("Edit_Data_Logged", "Failed to read value.", databaseError.toException());
+                        }
+                    });
                 }
             }
         });

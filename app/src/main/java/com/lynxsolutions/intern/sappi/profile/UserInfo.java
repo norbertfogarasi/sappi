@@ -15,7 +15,7 @@ public class UserInfo {
 
     }
 
-    public  UserInfo(String name,String email,String phonenumber,String photo)
+    public UserInfo(String name,String email,String phonenumber,String photo)
     {
         this.name=name;
         this.email=email;
