@@ -9,32 +9,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.SplashScreenActivity">
+        <activity
+            android:name=".main.SplashScreenActivity"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
         <activity
             android:name=".login.LoginActivity"
-            android:windowSoftInputMode="stateVisible"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".login.RegisterActivity"
             android:parentActivityName=".login.LoginActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".login.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".main.MainActivity"></activity>
-
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

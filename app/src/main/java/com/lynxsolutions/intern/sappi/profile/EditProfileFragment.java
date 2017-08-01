@@ -46,7 +46,7 @@ public class EditProfileFragment extends Fragment {
 
     Button editProfileButton;
     EditText nameText,emailText,phoneText,facebookText;
-    CircleImageView profilePicture;
+    //CircleImageView profilePicture;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -71,7 +71,7 @@ public class EditProfileFragment extends Fragment {
     }
 
     private void initializeViews(View view) {
-        profilePicture = view.findViewById(R.id.profile_image);
+        //profilePicture = view.findViewById(R.id.profile_image);
         nameText = view.findViewById(R.id.edit_name_text);
         emailText = view.findViewById(R.id.edit_email_text);
         phoneText = view.findViewById(R.id.edit_mobile_text);
@@ -180,15 +180,15 @@ public class EditProfileFragment extends Fragment {
 
     private void addImageFromGallery(){
 
-        profilePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-            }
-        });
+//        profilePicture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+//            }
+//        });
 
     }
 
