@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -68,36 +69,18 @@ public class MainActivity extends AppCompatActivity
         navHeader = navigationView.getHeaderView(0);
         bgImage = (ImageView) navHeader.findViewById(R.id.nav_bg_image);
         profileImage = (ImageView) navHeader.findViewById(R.id.profile_photo);
-        emailTextView = (TextView)navHeader.findViewById(R.id.email_text_at_naviagtion_drawer);
+        emailTextView = (TextView) navHeader.findViewById(R.id.email_text_at_naviagtion_drawer);
 
         addBackGroundPhotoToNavigationDrawer();
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.main_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         switchToFragment(new NewsFeedFragment());
-
-        /*FirebaseAuth.getInstance().signInWithEmailAndPassword("kalmy07@yahoo.com", "123456")
-                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("Szevasz", "signInWithEmail:onComplete:" + task.isSuccessful());
-                        if (!task.isSuccessful()) {
-                            Log.w("Szevasz", "signInWithEmail:failed", task.getException());
-                        }
-
-                        // ...
-                    }
-                });
-
-*/
     }
 
     public void switchToFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.content, fragment).commit();
     }
-
-
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -142,9 +125,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_favorites) {
             switchToFragment(new FavoritesFragment());
         } else if (id == R.id.nav_signout) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                finish();
+            LoginManager.getInstance().logOut();
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -152,10 +136,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void setActionBarTitle(String title){
-        getSupportActionBar().setTitle(title);
-    }
-/*
     @Override
     protected void onStart() {
         super.onStart();
@@ -166,12 +146,12 @@ public class MainActivity extends AppCompatActivity
             finish();
         }
     }
-*/
-    private void addBackGroundPhotoToNavigationDrawer(){
+
+    private void addBackGroundPhotoToNavigationDrawer() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
-        DatabaseReference reToUser= FirebaseDatabase.getInstance().getReference("users");
+        DatabaseReference reToUser = FirebaseDatabase.getInstance().getReference("users");
         reToUser.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -183,7 +163,7 @@ public class MainActivity extends AppCompatActivity
                     Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
                             .bitmapTransform(new CircleTransform(MainActivity.this))
                             .into(profileImage);
-                }catch (IllegalArgumentException ex){
+                } catch (IllegalArgumentException ex) {
                     ex.printStackTrace();
                 }
             }
