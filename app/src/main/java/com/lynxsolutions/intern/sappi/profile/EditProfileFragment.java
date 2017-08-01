@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +33,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.main.MainActivity;
+
+import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
 /**
@@ -48,7 +52,7 @@ public class EditProfileFragment extends Fragment {
 
     Button editProfileButton;
     EditText nameText,emailText,phoneText,facebookText;
-    //CircleImageView profilePicture;
+    CircleImageView profilePicture;
 
     public EditProfileFragment() {
         // Required empty public constructor
@@ -74,7 +78,7 @@ public class EditProfileFragment extends Fragment {
     }
 
     private void initializeViews(View view) {
-        //profilePicture = view.findViewById(R.id.profile_image);
+        profilePicture = view.findViewById(R.id.profile_image);
         nameText = view.findViewById(R.id.edit_name_text);
         emailText = view.findViewById(R.id.edit_email_text);
         phoneText = view.findViewById(R.id.edit_mobile_text);
@@ -98,6 +102,11 @@ public class EditProfileFragment extends Fragment {
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                    Glide.with(getContext())
+                                            .load(new File(filePath.getPath())) // Uri of the picture
+                                            .into(profilePicture);
+
                                     final Uri downloadUrl = taskSnapshot.getDownloadUrl();
                                     refToUser.child(userId).addValueEventListener(new ValueEventListener() {
                                         @Override
@@ -194,6 +203,12 @@ public class EditProfileFragment extends Fragment {
                 phoneText.setText(info.getPhonenumber());
                 String facebbokName = "facebook.com/"+info.getName();
                 facebookText.setText(facebbokName);
+                try{
+                    Glide.with(getContext()).load(info.getPhoto()).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                            .into(profilePicture);
+                }catch (IllegalArgumentException ex){
+                    ex.printStackTrace();
+                }
             }
 
             @Override
@@ -205,15 +220,15 @@ public class EditProfileFragment extends Fragment {
 
     private void addImageFromGallery(){
 
-//        profilePicture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-//            }
-//        });
+        profilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+               intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+            }
+        });
 
     }
 
