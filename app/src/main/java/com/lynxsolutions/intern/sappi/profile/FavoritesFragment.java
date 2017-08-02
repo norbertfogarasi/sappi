@@ -4,17 +4,29 @@ package com.lynxsolutions.intern.sappi.profile;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.events.Event;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavoritesFragment extends Fragment {
 
+    RecyclerView recyclerView;
+    DatabaseReference firebaseDatabase;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -26,11 +38,51 @@ public class FavoritesFragment extends Fragment {
         getActivity().setTitle("Favorites");
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false);
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.favourites_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String userId = user.getUid();
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("favorites").child(userId);
+        // my_child_toolbar is defined in the layout file
+        FirebaseRecyclerAdapter<Event,FavoritesViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Event, FavoritesViewHolder>(
+                Event.class,
+                R.layout.favourites_recycler_view_rows,
+                FavoritesViewHolder.class,
+                firebaseDatabase
+        ) {
+            @Override
+            protected void populateViewHolder(FavoritesViewHolder viewHolder, Event model, int position) {
+                viewHolder.eventNameText.setText(model.getTitle());
+                viewHolder.eventDescriptionText.setText(model.getDescription());
+            }
+        };
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+
+
+        return rootView;
+    }
+
+
+    public static class FavoritesViewHolder extends RecyclerView.ViewHolder{
+
+
+        TextView eventNameText,eventDescriptionText;
+
+        public FavoritesViewHolder(View itemView){
+
+            super(itemView);
+            eventNameText = itemView.findViewById(R.id.title_of_favourite_event);
+            eventDescriptionText = itemView.findViewById(R.id.description_of_event);
+        }
+
     }
 
 }

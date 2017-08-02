@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.StringSignature;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -71,7 +72,7 @@ public class ProfileFragment extends Fragment {
                 emailText.setText(info.getEmail());
                 phoneText.setText(info.getPhonenumber());
                 try{
-                    Glide.with(getContext()).load(info.getPhoto()).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                    Glide.with(getContext()).load(info.getPhoto()).diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
                             .into(profilePicture);
                 }catch (IllegalArgumentException ex){
                     ex.printStackTrace();

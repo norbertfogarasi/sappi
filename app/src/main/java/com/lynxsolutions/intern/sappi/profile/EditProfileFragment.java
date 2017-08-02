@@ -42,6 +42,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class EditProfileFragment extends Fragment {
 
+    private UserInfo info;
     private Uri filePath;
     private static final int PICK_IMAGE_REQUEST = 234;
     private BottomNavigationView bottomNavigationView;
@@ -71,6 +72,7 @@ public class EditProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         initializeViews(view);
+        info = new UserInfo();
         setUserInformationToProfile();
         editProfileIfButtonPressed();
         addImageFromGallery();
@@ -103,30 +105,11 @@ public class EditProfileFragment extends Fragment {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                    Glide.with(getContext())
-                                            .load(new File(filePath.getPath())) // Uri of the picture
-                                            .into(profilePicture);
-
                                     final Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                                    refToUser.child(userId).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            UserInfo info = dataSnapshot.getValue(UserInfo.class);
-                                            Log.e("Request_Data",info.getName());
-                                            String name = nameText.getText().toString();
-                                            String email = emailText.getText().toString();
-                                            String phone = phoneText.getText().toString();
-                                            //Here we make sure the realtime database is changed only if there is any change in data
-                                            //refToUser.child(userId).child("name").setValue(name);
-                                            setIfeverythingIsCorrect(name,email,phone,info,downloadUrl.toString(),userId);
-                                        }
-
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-                                            Log.e("Edit_Data_Logged", "Failed to read value.", databaseError.toException());
-                                        }
-                                    });
-
+                                    String name = nameText.getText().toString();
+                                    String email = emailText.getText().toString();
+                                    String phone = phoneText.getText().toString();
+                                    setIfeverythingIsCorrect(name,email,phone,info,downloadUrl.toString(),userId);
                                     Toast.makeText(getContext(),"Upload Done", Toast.LENGTH_SHORT).show();
                                 }
                             })
@@ -196,8 +179,7 @@ public class EditProfileFragment extends Fragment {
         refToUser.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                UserInfo info = dataSnapshot.getValue(UserInfo.class);
-                Log.e("Request_Data",info.getName());
+                info = dataSnapshot.getValue(UserInfo.class);
                 nameText.setText(info.getName());
                 emailText.setText(info.getEmail());
                 phoneText.setText(info.getPhonenumber());

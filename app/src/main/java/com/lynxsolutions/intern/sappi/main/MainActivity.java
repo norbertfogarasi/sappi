@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.StringSignature;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -178,9 +179,9 @@ public class MainActivity extends AppCompatActivity
                 UserInfo info = dataSnapshot.getValue(UserInfo.class);
                 emailTextView.setText(info.getEmail());
                 try {
-                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().dontAnimate().diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
                             .into(bgImage);
-                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().dontAnimate().diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
                             .bitmapTransform(new CircleTransform(MainActivity.this))
                             .into(profileImage);
                 }catch (IllegalArgumentException ex){

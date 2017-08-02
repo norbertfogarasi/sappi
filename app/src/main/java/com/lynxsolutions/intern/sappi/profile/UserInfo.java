@@ -23,6 +23,12 @@ public class UserInfo {
         this.photo=photo;
     }
 
+    public UserInfo(String email, String name, String photo) {
+        this.email = email;
+        this.name = name;
+        this.photo = photo;
+    }
+
     public String getName() {
         return name;
     }
