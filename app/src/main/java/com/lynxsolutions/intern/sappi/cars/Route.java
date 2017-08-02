@@ -17,10 +17,10 @@ public class Route implements Parcelable{
     private String date;
     private String username;
 
-    public Route(String from, String to, String from_to, String description, String phonenumber, String uid, String date, String username) {
+    public Route(String from, String to, String description, String phonenumber, String uid, String date, String username) {
         this.from = from;
         this.to = to;
-        this.from_to = from_to;
+        this.from_to = from + "_" + to;
         this.description = description;
         this.phonenumber = phonenumber;
         this.uid = uid;

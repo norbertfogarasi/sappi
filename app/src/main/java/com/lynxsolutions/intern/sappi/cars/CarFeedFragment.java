@@ -1,6 +1,5 @@
 package com.lynxsolutions.intern.sappi.cars;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lynxsolutions.intern.sappi.R;
-import com.lynxsolutions.intern.sappi.main.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,7 +79,7 @@ public class CarFeedFragment extends Fragment {
 
     private void sendPostToFirebase() {
         String UID = "5634t5erfgsdg";
-        Route car = new Route("Tokyo", "Koronka", "New York_Koronka", "asedfasdfas", "9898797867", "4234erw", "2017 jun 12", "John");
+        Route car = new Route("Tokyo", "Koronka", "asedfasdfas", "9898797867", "4234erw", "2017 jun 12", "John");
         mPostRef.child(Long.toString(System.currentTimeMillis())).setValue(car);
     }
 

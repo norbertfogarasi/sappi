@@ -3,6 +3,7 @@ package com.lynxsolutions.intern.sappi.login;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -153,14 +154,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         @Override
                         protected Void doInBackground(final Void... params) {
                             firebaseAuthWithEmailAndPassword();
-                            publishProgress(25, 50, 75, 100);
+                            publishProgress(25, 50, 75);
                             return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(final Void result) {
-                            // Update your views here
-//                            progressBar.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
@@ -249,7 +244,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "signInWithEmailAndPassword: success");
-                    progressBar.setVisibility(View.INVISIBLE);
+                    progressBar.setProgress(100);
+                    //progressBar.setVisibility(View.INVISIBLE);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 } else {
@@ -259,6 +255,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressBar.setVisibility(View.INVISIBLE);
                 if (e instanceof FirebaseAuthInvalidUserException) {
                     mEditTextEmail.setError(getString(R.string.et_no_user));
                 }
@@ -273,26 +270,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         progressBar.setVisibility(View.VISIBLE);
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTask<Void, Integer, Void>() {
 
             @Override
             protected Void doInBackground(final Void... params) {
                 // Do your loading here. Don't touch any views from here, and then return null
                 Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
+                publishProgress(25, 50, 75);
                 AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
                 mAuth.signInWithCredential(credential)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    progressBar.setProgress(100);
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithCredential:success");
-
-//                                    String uId = user.getUid();
-//                                    writeNewUser(uId, etEmail.getText().toString(), etName.getText().toString(),
-//                                            etPhoneNumber.getText().toString(), PHOTO_URL);
-
                                     //Write new user to database
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                     writeNewUser(user.getUid(), user.getEmail(), user.getDisplayName(), user.getPhoneNumber(), user.getPhotoUrl().toString());
@@ -310,11 +304,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 return null;
             }
 
-
             @Override
-            protected void onPostExecute(final Void result) {
-                // Update your views here
-                progressBar.setVisibility(View.INVISIBLE);
+            protected void onProgressUpdate(Integer... values) {
+                //super.onProgressUpdate(values);
+                for (int i = 0; i < values.length; i++) {
+                    progressBar.setProgress(values[i]);
+                    Log.d("onProgressUpdate", values[i].toString());
+                }
             }
         }.execute();
     }
