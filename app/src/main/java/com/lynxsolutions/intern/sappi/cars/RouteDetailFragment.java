@@ -22,7 +22,6 @@ public class RouteDetailFragment extends Fragment {
     private TextView tvRouteDetail;
     private TextView tvFrom;
     private TextView tvTo;
-    private TextView tvRouteDescription;
     private TextView tvMyInfo;
     private TextView tvPhone;
 
@@ -38,9 +37,21 @@ public class RouteDetailFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_route_detail, container, false);
         getActivity().setTitle("Car Detail");
-        route = (Route) getArguments().get("route");
-        Toast.makeText(getContext(), route.getUsername(), Toast.LENGTH_SHORT).show();
+
         initViews(view);
+
+        //Getting the Bundle Object
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            Route route = (Route) bundle.get("route");
+            if(route != null) {
+                tvAddedBy.append(route.getUsername());
+                tvFrom.setText(route.getFrom());
+                tvTo.setText(route.getTo());
+                tvRouteDetail.setText(route.getDescription());
+            }
+        }
+        //Toast.makeText(getContext(), route.getUsername(), Toast.LENGTH_SHORT).show();
         return view;
     }
 
