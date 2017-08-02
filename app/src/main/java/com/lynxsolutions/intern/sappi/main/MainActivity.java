@@ -15,16 +15,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.cars.CarFeedFragment;
-import com.lynxsolutions.intern.sappi.cars.NavigationManager;
 import com.lynxsolutions.intern.sappi.events.EventFeedFragment;
 import com.lynxsolutions.intern.sappi.login.LoginActivity;
 import com.lynxsolutions.intern.sappi.news.NewsFeedFragment;
+import com.lynxsolutions.intern.sappi.profile.CircleTransform;
 import com.lynxsolutions.intern.sappi.profile.FavoritesFragment;
 import com.lynxsolutions.intern.sappi.profile.ProfileFragment;
+import com.lynxsolutions.intern.sappi.profile.UserInfo;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,14 +47,14 @@ public class MainActivity extends AppCompatActivity
     private ImageView bgImage, profileImage;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
-    private NavigationManager manager;
+    private TextView emailTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -54,16 +67,19 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navHeader = navigationView.getHeaderView(0);
-        bgImage = (ImageView) findViewById(R.id.nav_bg_image);
-        profileImage = (ImageView) findViewById(R.id.profile_photo);
+        bgImage = (ImageView) navHeader.findViewById(R.id.nav_bg_image);
+        profileImage = (ImageView) navHeader.findViewById(R.id.profile_photo);
+        emailTextView = (TextView) navHeader.findViewById(R.id.email_text_at_naviagtion_drawer);
 
-
-        manager = new NavigationManager(getSupportFragmentManager());
-
+        addBackGroundPhotoToNavigationDrawer();
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.main_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        manager.switchToFragment(new NewsFeedFragment());
+        switchToFragment(new NewsFeedFragment());
+    }
 
+    public void switchToFragment(Fragment fragment) {
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.content, fragment).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -73,13 +89,13 @@ public class MainActivity extends AppCompatActivity
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    manager.switchToFragment(new NewsFeedFragment());
+                    switchToFragment(new NewsFeedFragment());
                     return true;
                 case R.id.navigation_cars:
-                    manager.switchToFragment(new CarFeedFragment());
+                    switchToFragment(new CarFeedFragment());
                     return true;
                 case R.id.navigation_events:
-                    manager.switchToFragment(new EventFeedFragment());
+                    switchToFragment(new EventFeedFragment());
                     return true;
             }
             return false;
@@ -105,22 +121,19 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {//for testing purpose
-            manager.switchToFragment(new ProfileFragment());
+            switchToFragment(new ProfileFragment());
         } else if (id == R.id.nav_favorites) {
-            manager.switchToFragment(new FavoritesFragment());
+            switchToFragment(new FavoritesFragment());
         } else if (id == R.id.nav_signout) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                finish();
+            LoginManager.getInstance().logOut();
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void setActionBarTitle(String title){
-        getSupportActionBar().setTitle(title);
     }
 
     @Override
@@ -132,6 +145,34 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
         }
+    }
+
+    private void addBackGroundPhotoToNavigationDrawer() {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = user.getUid();
+        DatabaseReference reToUser = FirebaseDatabase.getInstance().getReference("users");
+        reToUser.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserInfo info = dataSnapshot.getValue(UserInfo.class);
+                emailTextView.setText(info.getEmail());
+                try {
+                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                            .into(bgImage);
+                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+                            .bitmapTransform(new CircleTransform(MainActivity.this))
+                            .into(profileImage);
+                } catch (IllegalArgumentException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

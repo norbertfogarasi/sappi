@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "856707857749-5spkr17a3592lc5lhqnm39pmrv9dku73.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lynxsolutions.intern.sappi",
+            "certificate_hash": "66c3e5ed76fe3c711c54ab894e5bc42b47fe9785"
+          }
+        },
+        {
           "client_id": "856707857749-9qaen55s89s7mrr43m89gnegs16663e6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -39,6 +47,13 @@
         "appinvite_service": {
           "status": 2,
           "other_platform_oauth_client": [
+            {
+              "client_id": "856707857749-5djfikvaq7buf7n4mcdjmeo743cfnh43.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lynxsolutions.elod.sappi"
+              }
+            },
             {
               "client_id": "856707857749-cqdqjhovtpjtmt4f7sh11kl2j1mpnk6p.apps.googleusercontent.com",
               "client_type": 3
