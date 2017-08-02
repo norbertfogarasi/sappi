@@ -1,22 +1,37 @@
 package com.lynxsolutions.intern.sappi.cars;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.profile.UserInfo;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,6 +48,10 @@ public class AddRouteFragment extends Fragment {
     private Place placeFrom;
     private Place placeTo;
     private Button submitBtn;
+    private UserInfo userInfo;
+    private FirebaseUser user;
+    private DatabaseReference mRef;
+    private NavigationManager manager;
 
     public AddRouteFragment() {
         // Required empty public constructor
@@ -44,6 +63,9 @@ public class AddRouteFragment extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_add_route, container, false);
 
+        manager = new NavigationManager(getFragmentManager());
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        mRef = FirebaseDatabase.getInstance().getReference("users");
         autocompleteFrom = (PlaceAutocompleteFragment)getActivity().
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_from);
 
@@ -57,7 +79,8 @@ public class AddRouteFragment extends Fragment {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendPostToFirebase();
+                addNewCar();
+
             }
         });
 
@@ -92,20 +115,16 @@ public class AddRouteFragment extends Fragment {
         return view;
     }
 
-    private void sendPostToFirebase() {
 
+    private void addNewCar(){
 
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-/*
-        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("users");
         mRef.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                info = dataSnapshot.getValue(UserInfo.class);
-                Log.d(TAG, "onDataChange: "+info.getName());
-                Log.d(TAG, "onDataChange: "+info.getPhonenumber());
+                userInfo = dataSnapshot.getValue(UserInfo.class);
+                if(userInfo.getPhonenumber().isEmpty())
+                    setPhoneNumber();
+                else sendPostToFirebase();
             }
 
             @Override
@@ -113,20 +132,67 @@ public class AddRouteFragment extends Fragment {
                 Log.d(TAG, "onCancelled: " +databaseError);
 
             }
-        });*/
+        });
+    }
+
+    private void setPhoneNumber() {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Enter your phone number");
+            builder.setCancelable(true);
+
+            final EditText input = new EditText(getContext());
+            input.setInputType(InputType.TYPE_CLASS_PHONE);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+            input.setLayoutParams(lp);
+            builder.setView(input);
+
+
+
+            builder.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                        if(input.getText().toString().isEmpty())
+                            Toast.makeText(getContext(), "Invalid phone number", Toast.LENGTH_SHORT).show();
+                        else {
+                            userInfo.setPhonenumber(input.getText().toString());
+                            sendPostToFirebase();
+                            manager.switchToFragment(new CarFeedFragment());
+                            Toast.makeText(getContext(), "Added succesfully", Toast.LENGTH_SHORT).show();
+                        }
+                }
+            });
+            builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void sendPostToFirebase() {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
 
         Route car = new Route(placeFrom.getName().toString(),placeTo.getName().toString(),"NINCS LEIRAS",
-                "NINCS TELEFONSZAM",user.getUid(),dateFormat.format(date),"NINCS NEV");
+                userInfo.getPhonenumber(),user.getUid(),dateFormat.format(date),userInfo.getName());
         FirebaseDatabase.getInstance().getReference("cars").child(Long.toString(System.currentTimeMillis())).setValue(car);
     }
 
     private void setIcons() {
         ImageView fromIcon = (ImageView)((LinearLayout)autocompleteFrom.getView()).getChildAt(0);
+        TextView fromText = (TextView)((LinearLayout) autocompleteFrom.getView()).getChildAt(1);
+        fromText.setHint("From");
         fromIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_my_location_black_24dp));
 
+        TextView toText = (TextView)((LinearLayout) autocompleteTo.getView()).getChildAt(1);
+        toText.setHint("To");
         ImageView toIcon = (ImageView)((LinearLayout)autocompleteTo.getView()).getChildAt(0);
         toIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_location_on_black_24dp));
     }
