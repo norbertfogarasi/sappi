@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/car_detail_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,14 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/route_detail_profile_image"
@@ -32,6 +26,7 @@
                 app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
 
             <TextView
+                android:scrollbars="vertical"
                 android:id="@+id/route_detail_tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,9 +35,9 @@
                 android:layout_marginTop="8dp"
                 android:text="My Destination"
                 android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/car_detail_textview_size"
                 app:layout_constraintLeft_toRightOf="@+id/route_detail_profile_image"
-                app:layout_constraintTop_toTopOf="@+id/route_detail_profile_image"
-                android:textSize="@dimen/tv_text_size"/>
+                app:layout_constraintTop_toTopOf="@+id/route_detail_profile_image" />
 
             <TextView
                 android:id="@+id/route_detail_tv_added_by"
@@ -53,7 +48,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Added by "
-                android:textSize="@dimen/tv_text_size"
+                android:textSize="@dimen/car_detail_textview_size"
                 app:layout_constraintBottom_toBottomOf="@+id/route_detail_profile_image"
                 app:layout_constraintLeft_toRightOf="@+id/route_detail_profile_image"
                 app:layout_constraintTop_toBottomOf="@+id/route_detail_tv_name" />
@@ -77,109 +72,118 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="From"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView7"
-                android:textSize="18sp"/>
+                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
             <ImageView
                 android:id="@+id/imageView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toRightOf="@+id/textView5"
-                app:srcCompat="@drawable/ic_location_on_black_24dp"
-                app:layout_constraintTop_toTopOf="@+id/textView5" />
+                app:layout_constraintTop_toTopOf="@+id/textView5"
+                app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toRightOf="@+id/textView13"
-                app:srcCompat="@drawable/ic_from_black_24dp"
-                app:layout_constraintTop_toTopOf="@+id/textView13" />
+                app:layout_constraintTop_toTopOf="@+id/textView13"
+                app:srcCompat="@drawable/ic_from_black_24dp" />
 
             <TextView
                 android:id="@+id/route_detail_tv_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Tg. Mures"
-                app:layout_constraintLeft_toRightOf="@+id/imageView6"
+                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="@+id/imageView6"
                 android:maxLines="1"
-                android:layout_marginTop="0dp" />
+                android:text="Tg. Mures"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toRightOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:text="To"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@+id/route_detail_tv_from"
-                android:layout_marginStart="8dp"
-                android:textSize="18sp"
                 app:layout_constraintTop_toTopOf="@+id/route_detail_tv_from" />
 
             <TextView
                 android:id="@+id/route_detail_tv_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Baile Tusnad"
-                app:layout_constraintTop_toTopOf="@+id/imageView9"
                 android:layout_marginStart="8dp"
-                android:textSize="18sp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="0dp"
                 android:maxLines="1"
-                app:layout_constraintLeft_toRightOf="@+id/imageView9" />
+                android:text="Baile Tusnad"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toRightOf="@+id/imageView9"
+                app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
-            <TextView
-                android:id="@+id/route_detail_tv_description"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+            <ScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="0dp"
+                android:fillViewport="true"
+                android:layout_height="150dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="10dp"
-                android:padding="8dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer laoreet ullamcorper auctor. Etiam ac sem rutrum, consectetur ante in, porttitor nisi. Nam quam tellus, maximus sed augue ut, sollicitudin tincidunt nisl. Praesent id libero in nulla iaculis efficitur. Nulla sapien felis, consectetur sit amet metus euismod, tincidunt rutrum nunc. "
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/imageView9"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:scrollbars="vertical"
-                android:textSize="@dimen/tv_text_size"/>
+                android:layout_marginStart="8dp">
+
+                <TextView
+                    android:id="@+id/route_detail_tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer laoreet ullamcorper auctor. Etiam ac sem rutrum, consectetur ante in, porttitor nisi. Nam quam tellus, maximus sed augue ut, sollicitudin tincidunt nisl. Praesent id libero in nulla iaculis efficitur. Nulla sapien felis, consectetur sit amet metus euismod, tincidunt rutrum nunc. "
+                    android:textSize="@dimen/car_detail_textview_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+            </ScrollView>
 
             <TextView
                 android:id="@+id/route_detail_tv_my_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
-                android:text="MY INFO"
-                android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="7dp"
-                android:textSize="@dimen/tv_text_size"/>
+                android:text="MY INFO"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/tv_text_size"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
             <TextView
                 android:id="@+id/route_detail_tv_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="PHONE"
                 android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/tv_text_size"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView2"
                 app:layout_constraintLeft_toRightOf="@+id/route_detail_tv_my_info"
-                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp"
-                android:textSize="@dimen/tv_text_size"/>
+                android:layout_marginBottom="8dp" />
 
         </android.support.constraint.ConstraintLayout>
-        </ScrollView>
+
     </android.support.v7.widget.CardView>
 </FrameLayout>

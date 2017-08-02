@@ -18,7 +18,14 @@ import com.lynxsolutions.intern.sappi.R;
  */
 public class RouteDetailFragment extends Fragment {
 
+    private TextView tvAddedBy;
     private TextView tvRouteDetail;
+    private TextView tvFrom;
+    private TextView tvTo;
+    private TextView tvRouteDescription;
+    private TextView tvMyInfo;
+    private TextView tvPhone;
+
     Route route;
 
     public RouteDetailFragment() {
@@ -38,8 +45,14 @@ public class RouteDetailFragment extends Fragment {
     }
 
     private void initViews(View view) {
+        //Initializes the views
+        tvAddedBy = view.findViewById(R.id.route_detail_tv_added_by);
+        tvFrom = view.findViewById(R.id.route_detail_tv_from);
+        tvTo = view.findViewById(R.id.route_detail_tv_to);
         tvRouteDetail = view.findViewById(R.id.route_detail_tv_description);
-        tvRouteDetail.setMovementMethod(new ScrollingMovementMethod());
+        //tvRouteDetail.setMovementMethod(new ScrollingMovementMethod());
+        tvMyInfo = view.findViewById(R.id.route_detail_tv_my_info);
+        tvPhone = view.findViewById(R.id.route_detail_tv_phone);
     }
 
 }
