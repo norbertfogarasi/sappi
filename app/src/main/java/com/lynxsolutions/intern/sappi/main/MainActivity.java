@@ -64,20 +64,6 @@ public class MainActivity extends AppCompatActivity
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         manager.switchToFragment(new NewsFeedFragment());
 
-        /*FirebaseAuth.getInstance().signInWithEmailAndPassword("kalmy07@yahoo.com", "123456")
-                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("Szevasz", "signInWithEmail:onComplete:" + task.isSuccessful());
-                        if (!task.isSuccessful()) {
-                            Log.w("Szevasz", "signInWithEmail:failed", task.getException());
-                        }
-
-                        // ...
-                    }
-                });
-
-*/
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

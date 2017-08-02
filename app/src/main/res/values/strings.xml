@@ -63,4 +63,5 @@
     <string name="title_home">Home</string>
     <string name="title_cars">Cars</string>
     <string name="title_events">Events</string>
+    <string name="text_submit">Submit</string>
 </resources>
