@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Sappi.iml" filepath="$PROJECT_DIR$/Sappi.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sappi.iml" filepath="$PROJECT_DIR$/sappi.iml" />
       <module fileurl="file://$PROJECT_DIR$/sappi.iml" filepath="$PROJECT_DIR$/sappi.iml" />
     </modules>
   </component>
