@@ -22,5 +22,6 @@ public class NavigationManager {
 
     public void switchToFragment(Fragment fragment) {
         manager.beginTransaction().replace(R.id.content, fragment).commit();
+      //  manager.beginTransaction().replace(R.id.content, fragment).addToBackStack(null).commit();  // back pressed
     }
 }

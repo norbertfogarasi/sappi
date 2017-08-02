@@ -22,7 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<Event> EventList;
     private Context context;
-
+    private EventAdapterClickListener listener;
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -41,9 +41,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    RecyclerViewAdapter(List<Event> mQuestionList, Context context) {
+    RecyclerViewAdapter(List<Event> mQuestionList, Context context, EventAdapterClickListener listener) {
         this.EventList = mQuestionList;
         this.context=context;
+        this.listener = listener;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Event question = EventList.get(position);
+        final Event question = EventList.get(position);
         StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(question.getImageUrl());
         Glide.with(context)
                 .using(new FirebaseImageLoader())
@@ -69,7 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                    listener.onItemClick(question);
             }
         });
     }

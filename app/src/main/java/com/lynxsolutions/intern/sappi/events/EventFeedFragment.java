@@ -19,7 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.cars.NavigationManager;
 import com.lynxsolutions.intern.sappi.cars.Route;
+import com.lynxsolutions.intern.sappi.cars.RouteDetailFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,7 @@ public class EventFeedFragment extends Fragment {
     private static final int TOTAL_ITEM_EACH_LOAD = 5;
     private ProgressBar mProgressBar;
     private DatabaseReference mDatabase, db;
+    private NavigationManager manager;
 
     DatabaseReference mPostRef;
 
@@ -59,7 +62,16 @@ public class EventFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_feed, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.postsid);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressbar);
-        mAdapter = new RecyclerViewAdapter(eventList, getContext());
+        mAdapter = new RecyclerViewAdapter(eventList, getContext(), new EventAdapterClickListener() {
+            @Override
+            public void onItemClick(Event event) {
+                EventDetailFragment eventDetailFragment = new EventDetailFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("event",event);
+                eventDetailFragment.setArguments(bundle);
+                manager.switchToFragment(eventDetailFragment);
+            }
+        });
         LinearLayoutManager mLayoutManager =
                 new LinearLayoutManager(getApplicationContext());
         //layoutManager.setReverseLayout(true);
