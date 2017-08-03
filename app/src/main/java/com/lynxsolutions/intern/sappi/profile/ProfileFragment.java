@@ -30,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.main.MainActivity;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -103,6 +105,4 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-
-
 }

@@ -57,6 +57,7 @@ public class EventFeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         getActivity().setTitle("Events Feed");
+        manager = new NavigationManager(getFragmentManager());
         mDatabase = FirebaseDatabase.getInstance().getReference();
         db = FirebaseDatabase.getInstance().getReference();
         View view = inflater.inflate(R.layout.fragment_event_feed, container, false);
