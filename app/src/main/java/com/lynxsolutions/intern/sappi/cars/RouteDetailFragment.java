@@ -1,6 +1,8 @@
 package com.lynxsolutions.intern.sappi.cars;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ArrowKeyMovementMethod;
@@ -22,7 +24,6 @@ public class RouteDetailFragment extends Fragment {
     private TextView tvRouteDetail;
     private TextView tvFrom;
     private TextView tvTo;
-    private TextView tvMyInfo;
     private TextView tvPhone;
 
     Route route;
@@ -43,15 +44,24 @@ public class RouteDetailFragment extends Fragment {
         //Getting the Bundle Object
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            Route route = (Route) bundle.get("route");
+            final Route route = (Route) bundle.get("route");
             if(route != null) {
                 tvAddedBy.append(route.getUsername());
                 tvFrom.setText(route.getFrom());
                 tvTo.setText(route.getTo());
                 tvRouteDetail.setText(route.getDescription());
+                tvPhone.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Putting the phone number into dialer
+                        String uri = "tel:" + route.getPhonenumber();
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse(uri));
+                        startActivity(intent);
+                    }
+                });
             }
         }
-        //Toast.makeText(getContext(), route.getUsername(), Toast.LENGTH_SHORT).show();
         return view;
     }
 
@@ -61,15 +71,7 @@ public class RouteDetailFragment extends Fragment {
         tvFrom = view.findViewById(R.id.route_detail_tv_from);
         tvTo = view.findViewById(R.id.route_detail_tv_to);
         tvRouteDetail = view.findViewById(R.id.route_detail_tv_description);
-        //tvRouteDetail.setMovementMethod(new ScrollingMovementMethod());
-//        tvMyInfo = view.findViewById(R.id.route_detail_tv_my_info);
-//        tvPhone = view.findViewById(R.id.route_detail_tv_phone);
-        view.findViewById(R.id.route_detail_tv_phone).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        tvPhone = view.findViewById(R.id.route_detail_tv_phone);
     }
 
 }
