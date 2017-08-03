@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/splash_screen_img"
+    android:theme="@style/SplashTheme">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/logo"
-        android:textSize="60sp" />
+        android:src="@mipmap/splash_screen_logo"
+        android:layout_marginLeft="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="100dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

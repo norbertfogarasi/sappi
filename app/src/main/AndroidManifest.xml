@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lynxsolutions.intern.sappi">
 
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.SplashScreenActivity">
+        <activity android:name=".main.SplashScreenActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,14 +24,17 @@
         </activity>
         <activity
             android:name=".login.LoginActivity"
-            android:windowSoftInputMode="stateVisible" />
+            android:windowSoftInputMode="stateVisible"
+            android:theme="@style/LoginTheme"/>
         <activity
             android:name=".login.RegisterActivity"
             android:parentActivityName=".login.LoginActivity"
-            android:windowSoftInputMode="stateVisible" />
+            android:windowSoftInputMode="stateVisible"
+            android:theme="@style/RegisterTheme"/>
         <activity
             android:name=".login.ForgotPasswordActivity"
-            android:windowSoftInputMode="stateVisible" />
+            android:windowSoftInputMode="stateVisible"
+            android:theme="@style/ForgotPasswordTheme"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -37,11 +45,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBvJbl4daFQUSUTxwXQFSoJS5jBhz7Sm9o" />
-
-        <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
 
         <activity android:name=".main.MainActivity">
 

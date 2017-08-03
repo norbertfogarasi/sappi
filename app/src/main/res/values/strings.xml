@@ -15,7 +15,7 @@
     <string name="et_name_hint">NAME</string>
     <string name="et_password_confirm_hint">CONFIRM PASSWORD</string>
     <string name="et_phone_hint">PHONE NUMBER *</string>
-    <string name="label_required">* required to submit car announcement</string>
+    <string name="label_required">* required to submit car</string>
 
     <string name="et_email_error">E-mail required</string>
     <string name="et_password_error">Password required</string>

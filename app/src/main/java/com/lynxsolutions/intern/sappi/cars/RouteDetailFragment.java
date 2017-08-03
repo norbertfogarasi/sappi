@@ -62,8 +62,14 @@ public class RouteDetailFragment extends Fragment {
         tvTo = view.findViewById(R.id.route_detail_tv_to);
         tvRouteDetail = view.findViewById(R.id.route_detail_tv_description);
         //tvRouteDetail.setMovementMethod(new ScrollingMovementMethod());
-        tvMyInfo = view.findViewById(R.id.route_detail_tv_my_info);
-        tvPhone = view.findViewById(R.id.route_detail_tv_phone);
+//        tvMyInfo = view.findViewById(R.id.route_detail_tv_my_info);
+//        tvPhone = view.findViewById(R.id.route_detail_tv_phone);
+        view.findViewById(R.id.route_detail_tv_phone).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
 }

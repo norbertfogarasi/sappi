@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e89f02</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#E89F02</color>
+    <color name="colorPrimary">#00b818</color>
+    <color name="colorPrimaryDark">#009414</color>
+    <color name="colorAccent">#78009f</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDark">#FF000000</color>
+
+    <!-- Splash -->
+    <color name="colorPrimaryDarkSplash">#25AF31</color>
+
+    <!-- Login -->
+    <color name="colorPrimaryDarkLogin">#0c9c47</color>
+
+    <!-- Register -->
+    <color name="colorPrimaryDarkRegister">#00790a</color>
+
+    <!-- Forgot -->
+    <color name="colorPrimaryDarkForgot">#07771b</color>
 </resources>

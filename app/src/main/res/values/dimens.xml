@@ -15,4 +15,7 @@
     <dimen name="nav_header_height">200dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="car_detail_textview_size">15sp</dimen>
+
+    <dimen name="logo_padding_left_rigth">40dp</dimen>
+    <dimen name="button_text_size">17sp</dimen>
 </resources>

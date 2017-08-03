@@ -22,7 +22,9 @@
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation" />
+        android:background="@color/colorPrimary"
+        app:menu="@menu/navigation"
+        app:itemIconTint="@drawable/bottom_navigation_bar_icon"
+        app:itemTextColor="@drawable/bottom_navigation_bar_icon" />
 
 </RelativeLayout>
