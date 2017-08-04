@@ -80,6 +80,14 @@ public class Event  implements Parcelable{
         return title;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
