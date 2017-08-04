@@ -76,8 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.d(TAG, "createUserWithEmail: success");
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            String uId = user.getUid();
-                            writeNewUser(uId, etEmail.getText().toString(), etName.getText().toString(),
+                            writeNewUser(user.getUid(), etEmail.getText().toString(), etName.getText().toString(),
                                     etPhoneNumber.getText().toString(), PHOTO_URL);
                             Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                             i.putExtra("email", etEmail.getText().toString());

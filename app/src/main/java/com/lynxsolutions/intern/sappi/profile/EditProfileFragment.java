@@ -184,7 +184,7 @@ public class EditProfileFragment extends Fragment {
                 info = dataSnapshot.getValue(UserInfo.class);
                 tvName.setText(info.getName());
                 emailText.setText(info.getEmail());
-                if (!etPhone.getText().toString().equals(getString(R.string.et_no_phone))) {
+                if (!etPhone.getText().toString().equals(getString(R.string.et_no_phone_hint))) {
                     etPhone.setText(info.getPhonenumber());
                 }
                 String facebookName = "facebook.com/" + info.getName();

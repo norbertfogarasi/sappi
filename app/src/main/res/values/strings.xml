@@ -33,6 +33,7 @@
 
     <!--ProfileActivityStrings-->
     <string name="edit_button_text">Edit</string>
+    <string name="et_no_phone_hint">No phone number</string>
 
     <!--DrawerItemsStrings-->
     <string name="profile_text">Profile</string>

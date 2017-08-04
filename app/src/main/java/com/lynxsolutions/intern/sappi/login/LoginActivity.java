@@ -332,7 +332,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            writeNewUser(user.getUid(), user.getEmail(), user.getDisplayName(), user.getPhoneNumber(), user.getPhotoUrl().toString());
+                            String phoneNumber = user.getPhoneNumber() == null ? "" : user.getPhoneNumber();
+                            writeNewUser(user.getUid(), user.getEmail(), phoneNumber, user.getPhoneNumber(), user.getPhotoUrl().toString());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         } else {

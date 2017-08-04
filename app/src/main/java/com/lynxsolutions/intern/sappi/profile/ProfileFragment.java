@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +40,8 @@ public class ProfileFragment extends Fragment {
 
     private CircleImageView profilePicture;
     Button editProfileButton;
-    TextView emailText,phoneText,facebookText,nameText;
+    TextView tvName;
+    private EditText etEmail, etPhone, etFacebook;
 
 
     public ProfileFragment() {
@@ -70,9 +72,9 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserInfo info = dataSnapshot.getValue(UserInfo.class);
-                nameText.setText(info.getName());
-                emailText.setText(info.getEmail());
-                phoneText.setText(info.getPhonenumber());
+                tvName.setText(info.getName());
+                etEmail.setText(info.getEmail());
+                etPhone.setText(info.getPhonenumber());
                 try{
                     Glide.with(getContext()).load(info.getPhoto()).diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
                             .into(profilePicture);
@@ -80,7 +82,7 @@ public class ProfileFragment extends Fragment {
                     ex.printStackTrace();
                 }
                 String facebbokName = "facebook.com/"+info.getName();
-                facebookText.setText(facebbokName);
+                etFacebook.setText(facebbokName);
             }
 
             @Override
@@ -92,12 +94,12 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initializeViews(View view) {
-        profilePicture = view.findViewById(R.id.profile_image);
-        nameText = view.findViewById(R.id.nameofuser_text);
-        emailText = view.findViewById(R.id.email_text);
-        phoneText = view.findViewById(R.id.mobile_text);
-        facebookText = view.findViewById(R.id.facebook_text);
-        editProfileButton = view.findViewById(R.id.edit_profile_button);
+        profilePicture = view.findViewById(R.id.fragment_profile_image);
+        tvName = view.findViewById(R.id.fragment_profile_tv_name);
+        etEmail = view.findViewById(R.id.fragment_profile_et_email);
+        etPhone = view.findViewById(R.id.fragment_profile_et_phone);
+        etFacebook = view.findViewById(R.id.fragment_profile_et_facebook);
+        editProfileButton = view.findViewById(R.id.fragment_profile_button_edit);
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

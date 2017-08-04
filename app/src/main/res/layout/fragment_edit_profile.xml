@@ -1,106 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lynxsolutions.intern.sappi.profile.EditProfileFragment">
-    <RelativeLayout
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline15"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <com.lynxsolutions.intern.sappi.profile.CircleImageView
+            android:id="@+id/fragment_edit_profile_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline15"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline14"
+            app:layout_constraintRight_toLeftOf="@+id/guideline13"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.lynxsolutions.intern.sappi.profile.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                app:civ_border_width="12dp"
-                android:clickable="true"
-                android:src="@drawable/images"
-                app:civ_border_color="#E89F02"
-                app:civ_second_fill_color="#484848"
-                app:civ_second_border_width="9dp"
-                android:layout_marginTop="23dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/fragment_edit_profile_tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_edit_profile_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Name"
+            android:textAlignment="center"
+            android:textColor="#353535"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline14"
+            app:layout_constraintRight_toLeftOf="@+id/guideline13"
+            app:layout_constraintTop_toTopOf="@+id/guideline15" />
 
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginTop="24dp"
-                android:textColor="#353535"
-                android:gravity="center"
-                android:id="@+id/edit_name_text"
-                android:textStyle="bold"
-                android:background="@drawable/border_for_profile_textview"
-                android:layout_below="@+id/profile_image"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+        <EditText
+            android:id="@+id/fragment_edit_profile_et_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/email_icon"
+            android:textStyle="italic"
+            android:inputType="textEmailAddress"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline14"
+            app:layout_constraintRight_toLeftOf="@+id/guideline13"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_tv_name" />
 
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/email_icon"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textStyle="bold"
-                android:background="@drawable/border_for_profile_textview"
-                android:id="@+id/edit_email_text"
-                android:layout_below="@+id/edit_name_text"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="34dp" />
+        <EditText
+            android:id="@+id/fragment_edit_profile_et_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/smartphone_icon"
+            android:hint="@string/et_no_phone_hint"
+            android:inputType="phone"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline14"
+            app:layout_constraintRight_toLeftOf="@+id/guideline13"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_et_email" />
 
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/smartphone_icon"
-                android:drawablePadding="10dp"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textStyle="bold"
-                android:background="@drawable/border_for_profile_textview"
-                android:id="@+id/edit_mobile_text"
-                android:layout_below="@+id/edit_email_text"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+        <EditText
+            android:id="@+id/fragment_edit_profile_et_facebook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/facebook_icon"
+            android:textStyle="italic"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline14"
+            app:layout_constraintRight_toLeftOf="@+id/guideline13"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_et_phone" />
 
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/facebook_icon"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:textStyle="italic"
-                android:paddingTop="10dp"
-                android:textSize="14sp"
-                android:paddingBottom="10dp"
-                android:background="@drawable/border_for_profile_textview"
-                android:id="@+id/edit_facebook_text"
-                android:layout_below="@+id/edit_mobile_text"
-                android:layout_alignParentStart="true" />
-
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:text="@string/save_button_text"
-                android:background="@drawable/edit_button_profile"
-                android:textColor="#ffffff"
-                android:textSize="18sp"
-                android:id="@+id/save_profile_button"
-                android:layout_marginTop="27dp"
-                android:layout_below="@+id/edit_facebook_text"
-                android:layout_alignParentStart="true" />
-        </RelativeLayout>
-    </RelativeLayout>
+        <Button
+            android:id="@+id/fragment_edit_profile_button_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorAccent"
+            android:text="@string/save_button_text"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_et_facebook"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline14"
+            app:layout_constraintRight_toLeftOf="@+id/guideline13"
+            android:layout_marginRight="8dp" />
+    </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
