@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class AddRouteFragment extends Fragment{
     private DatabaseReference mRef;
     private NavigationManager manager;
     private EditText description;
+    private static View view;
 
     public AddRouteFragment() {
         // Required empty public constructor
@@ -56,13 +58,23 @@ public class AddRouteFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_add_route, container, false);
-        initViews(view);
-        setListeners(view);
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null)
+                parent.removeView(view);
+        }
+        try {
+            view = inflater.inflate(R.layout.fragment_add_route, container, false);
+        } catch (InflateException e) {
+
+        }
+
+        initViews();
+        setListeners();
         return view;
     }
 
-    private void setListeners(View view){
+    private void setListeners(){
 
         view.findViewById(R.id.submit_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +111,7 @@ public class AddRouteFragment extends Fragment{
         });
     }
 
-    private void initViews(View view) {
+    private void initViews() {
         description = view.findViewById(R.id.description_of_car);
         manager = new NavigationManager(getFragmentManager());
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -198,5 +210,7 @@ public class AddRouteFragment extends Fragment{
         ImageView toIcon = (ImageView)((LinearLayout)autocompleteTo.getView()).getChildAt(0);
         toIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_location_on_black_24dp));
     }
+
+
 
 }

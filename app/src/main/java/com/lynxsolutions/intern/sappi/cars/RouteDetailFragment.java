@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ArrowKeyMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,8 @@ public class RouteDetailFragment extends Fragment {
     private TextView tvFrom;
     private TextView tvTo;
     private TextView tvPhone;
-
-    Route route;
+    private View view;
+    private Route route;
 
     public RouteDetailFragment() {
         // Required empty public constructor
@@ -36,37 +37,54 @@ public class RouteDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_route_detail, container, false);
-        getActivity().setTitle("Car Detail");
-
-        initViews(view);
-
-        //Getting the Bundle Object
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            final Route route = (Route) bundle.get("route");
-            if(route != null) {
-                tvAddedBy.append(route.getUsername());
-                tvFrom.setText(route.getFrom());
-                tvTo.setText(route.getTo());
-                tvRouteDetail.setText(route.getDescription());
-                tvPhone.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //Putting the phone number into dialer
-                        String uri = "tel:" + route.getPhonenumber();
-                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse(uri));
-                        startActivity(intent);
-                    }
-                });
-            }
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null)
+                parent.removeView(view);
         }
+        try {
+            view = inflater.inflate(R.layout.fragment_route_detail, container, false);
+        } catch (InflateException e) {
+
+        }
+
+        initViews();
+        getRouteObject();
+        setData();
+
         return view;
     }
 
-    private void initViews(View view) {
+    private void getRouteObject() {
+        //Getting the Bundle Object
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            route = (Route) bundle.get("route");
+        }
+    }
+
+    private void setData() {
+        if(route != null) {
+            tvAddedBy.append(route.getUsername());
+            tvFrom.setText(route.getFrom());
+            tvTo.setText(route.getTo());
+            tvRouteDetail.setText(route.getDescription());
+            tvPhone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Putting the phone number into dialer
+                    String uri = "tel:" + route.getPhonenumber();
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse(uri));
+                    startActivity(intent);
+                }
+            });
+        }
+    }
+
+    private void initViews() {
         //Initializes the views
+        getActivity().setTitle("Car Detail");
         tvAddedBy = view.findViewById(R.id.route_detail_tv_added_by);
         tvFrom = view.findViewById(R.id.route_detail_tv_from);
         tvTo = view.findViewById(R.id.route_detail_tv_to);
