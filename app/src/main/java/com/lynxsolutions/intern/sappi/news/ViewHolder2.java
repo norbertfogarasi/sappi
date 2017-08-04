@@ -1,7 +1,10 @@
 package com.lynxsolutions.intern.sappi.news;
 
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lynxsolutions.intern.sappi.R;
@@ -12,28 +15,27 @@ import com.lynxsolutions.intern.sappi.R;
 
 public class ViewHolder2 extends RecyclerView.ViewHolder{
 
-    private TextView label1, label2;
-
+    private TextView from,to;
+    private Button btn;
     public ViewHolder2(View v) {
         super(v);
-        label1 = (TextView) v.findViewById(R.id.text1);
-        label2 = (TextView) v.findViewById(R.id.text2);
+        from = (TextView) v.findViewById(R.id.map_from_text);
+        to = (TextView)v.findViewById(R.id.map_to_text);
     }
 
-    public TextView getLabel1() {
-        return label1;
+    public TextView getFrom() {
+        return from;
     }
 
-    public void setLabel1(TextView label1) {
-        this.label1 = label1;
+    public void setFrom(TextView from) {
+        this.from = from;
     }
 
-    public TextView getLabel2() {
-        return label2;
+    public TextView getTo() {
+        return to;
     }
 
-    public void setLabel2(TextView label2) {
-        this.label2 = label2;
+    public void setTo(TextView to) {
+        this.to = to;
     }
-
 }

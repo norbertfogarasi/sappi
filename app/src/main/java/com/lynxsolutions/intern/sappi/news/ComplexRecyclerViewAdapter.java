@@ -94,8 +94,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 ViewHolder2 vh2 = (ViewHolder2) viewHolder;
                 Route route = (Route)items.get(position);
                 if(route != null){
-                    vh2.getLabel1().setText(route.getDate());
-                    vh2.getLabel2().setText(route.getDescription());
+                    vh2.getFrom().setText(route.getFrom());
+                    vh2.getTo().setText(route.getTo());
                 }
                 break;
         }

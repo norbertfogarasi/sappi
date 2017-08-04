@@ -84,12 +84,24 @@ public class NewsFeedFragment extends Fragment {
                 getDatabaseReferenceForCars.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        /*
+                        for(Object obj :eventAndMapContainer){
+                            int i = eventAndMapContainer.indexOf(obj);
+                            Event event = (Event)eventAndMapContainer.get(i);
+                            if(event.ge)
+                        }*/
+
+
+
                         int j = 1;
                         for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                             route = snapshot.getValue(Route.class);
                             eventAndMapContainer.add(j,route);
                             j += 2;
                         }
+
+
+
                         recyclerView.setAdapter(new ComplexRecyclerViewAdapter(eventAndMapContainer,getContext()));
 
                     }
