@@ -2,11 +2,9 @@ package com.lynxsolutions.intern.sappi.news;
 
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.cars.Route;
 import com.lynxsolutions.intern.sappi.events.Event;
-import com.lynxsolutions.intern.sappi.events.RecyclerViewAdapter;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
 
 
 /**
@@ -38,6 +32,9 @@ public class NewsFeedFragment extends Fragment {
     DatabaseReference getDatabaseReferenceForCars;
     Event event;
     Route route;
+    ArrayList<Object> postContainer = new ArrayList<>();
+    ArrayList<Event> eventContainer = new ArrayList<>();
+    ArrayList<Route> routeContainer = new ArrayList<>();
     ArrayList<Object> eventAndMapContainer = new ArrayList<>();
 
 
@@ -80,6 +77,7 @@ public class NewsFeedFragment extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     event = snapshot.getValue(Event.class);
                     eventAndMapContainer.add(event);
+                    eventContainer.add(event);
                 }
                 getDatabaseReferenceForCars.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -96,13 +94,35 @@ public class NewsFeedFragment extends Fragment {
                         int j = 1;
                         for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                             route = snapshot.getValue(Route.class);
-                            eventAndMapContainer.add(j,route);
+//                            eventAndMapContainer.add(j,route);
+                            routeContainer.add(route);
                             j += 2;
                         }
 
+                        j = 0;
+                        int i = 0;
+                        while (i < routeContainer.size() && j < eventContainer.size()){
+                            if(Long.parseLong(routeContainer.get(i).getTimestamp()) < Long.parseLong(eventContainer.get(j).getTimestamp())) {
+                                postContainer.add(routeContainer.get(i));
+                                i++;
+                            }
+                            else {
+                                postContainer.add(eventContainer.get(j));
+                                j++;
+                            }
+                        }
+                        while (i < routeContainer.size()){
+                            postContainer.add(routeContainer.get(i));
+                            i++;
+                        }
+
+                        while(j < eventContainer.size()){
+                            postContainer.add(eventContainer.get(j));
+                            j++;
+                        }
 
 
-                        recyclerView.setAdapter(new ComplexRecyclerViewAdapter(eventAndMapContainer,getContext()));
+                        recyclerView.setAdapter(new ComplexRecyclerViewAdapter(postContainer,getContext()));
 
                     }
                     @Override

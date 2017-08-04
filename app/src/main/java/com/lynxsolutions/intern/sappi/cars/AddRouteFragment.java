@@ -193,10 +193,10 @@ public class AddRouteFragment extends Fragment{
     private void sendPostToFirebase() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
-
+        String timestamp = Long.toString(System.currentTimeMillis());
         Route car = new Route(placeFrom.getName().toString(),placeTo.getName().toString(),description.getText().toString(),
-                userInfo.getPhonenumber(),user.getUid(),dateFormat.format(date),userInfo.getName());
-        FirebaseDatabase.getInstance().getReference("cars").child(Long.toString(System.currentTimeMillis())).setValue(car);
+                userInfo.getPhonenumber(),user.getUid(),dateFormat.format(date),userInfo.getName(), timestamp);
+        FirebaseDatabase.getInstance().getReference("cars").child(timestamp).setValue(car);
     }
 
     private void setIconsAndTexts() {

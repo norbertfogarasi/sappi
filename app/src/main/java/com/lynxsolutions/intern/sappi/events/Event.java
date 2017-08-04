@@ -13,13 +13,27 @@ public class Event  implements Parcelable{
     private String title;
     private String UID;
     private String description;
+    private String timestamp;
+    private String location;
 
-    public Event(String imageUrl, String date, String title, String UID, String description) {
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+
+
+    public Event(String imageUrl, String date, String title, String UID, String description, String timestamp, String location) {
         this.imageUrl = imageUrl;
         this.date = date;
         this.title = title;
         this.UID = UID;
         this.description = description;
+        this.timestamp = timestamp;
+        this.location = location;
     }
     public Event()
     {};
@@ -30,6 +44,8 @@ public class Event  implements Parcelable{
         title = in.readString();
         UID = in.readString();
         description = in.readString();
+        timestamp = in.readString();
+        location = in.readString();
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {
@@ -96,5 +112,7 @@ public class Event  implements Parcelable{
         parcel.writeString(title);
         parcel.writeString(UID);
         parcel.writeString(description);
+        parcel.writeString(timestamp);
+        parcel.writeString(location);
     }
 }

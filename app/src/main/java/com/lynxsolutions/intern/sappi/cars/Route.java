@@ -16,8 +16,9 @@ public class Route implements Parcelable{
     private String uid;
     private String date;
     private String username;
+    private String timestamp;
 
-    public Route(String from, String to, String description, String phonenumber, String uid, String date, String username) {
+    public Route(String from, String to, String description, String phonenumber, String uid, String date, String username, String timestamp) {
         this.from = from;
         this.to = to;
         this.from_to = from + "_" + to;
@@ -26,6 +27,7 @@ public class Route implements Parcelable{
         this.uid = uid;
         this.date = date;
         this.username = username;
+        this.timestamp = timestamp;
     }
 
     protected Route(Parcel in) {
@@ -37,6 +39,7 @@ public class Route implements Parcelable{
         uid = in.readString();
         date = in.readString();
         username = in.readString();
+        timestamp = in.readString();
     }
 
     public static final Creator<Route> CREATOR = new Creator<Route>() {
@@ -51,6 +54,14 @@ public class Route implements Parcelable{
         }
     };
 
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -59,7 +70,7 @@ public class Route implements Parcelable{
         this.username = username;
     }
 
-    public Route() {}
+    public Route(){}
 
     public String getFrom() {
         return from;
@@ -132,5 +143,6 @@ public class Route implements Parcelable{
         parcel.writeString(uid);
         parcel.writeString(date);
         parcel.writeString(username);
+        parcel.writeString(timestamp);
     }
 }

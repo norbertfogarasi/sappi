@@ -77,10 +77,4 @@ public class CarFeedFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private void sendPostToFirebase() {
-        String UID = "5634t5erfgsdg";
-        Route car = new Route("Tokyo", "Koronka", "asedfasdfas", "9898797867", "4234erw", "2017 jun 12", "John");
-        mPostRef.child(Long.toString(System.currentTimeMillis())).setValue(car);
-    }
-
 }
