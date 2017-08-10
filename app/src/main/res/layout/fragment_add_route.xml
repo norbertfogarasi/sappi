@@ -80,7 +80,7 @@
             <EditText
                 android:id="@+id/description_of_car"
                 android:layout_width="match_parent"
-                android:layout_height="104dp"
+                android:layout_height="150dp"
                 android:hint="Please add description"
                 android:maxLength="120"
                 android:maxLines="3" />

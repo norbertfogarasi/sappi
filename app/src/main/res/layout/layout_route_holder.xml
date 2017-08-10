@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    cardCornerRadius="4dp"
+    cardElevation="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mapview" />
+
+        <TextView
+            android:id="@+id/map_from_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/button_route"
+            android:layout_alignBottom="@+id/button_route"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/map_to_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_route"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/button_route"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView4"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="#78009f"
+            android:minHeight="30dp"
+            android:minWidth="60dp"
+            android:text="More"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

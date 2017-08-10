@@ -15,8 +15,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.cars.RouteClickListener;
+import com.lynxsolutions.intern.sappi.main.NavigationManager;
 import com.lynxsolutions.intern.sappi.cars.Route;
+import com.lynxsolutions.intern.sappi.cars.RouteDetailFragment;
 import com.lynxsolutions.intern.sappi.events.Event;
+import com.lynxsolutions.intern.sappi.events.EventClickListener;
+import com.lynxsolutions.intern.sappi.events.EventDetailFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +29,7 @@ import java.util.Collections;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFeedFragment extends Fragment {
+public class NewsFeedFragment extends Fragment implements RouteClickListener, EventClickListener {
 
     private RecyclerView recyclerView;
     private DatabaseReference databaseReferenceForEvents;
@@ -35,6 +40,7 @@ public class NewsFeedFragment extends Fragment {
     private ArrayList<Event> eventContainer;
     private ArrayList<Route> routeContainer;
     private View view;
+    private NavigationManager manager;
 
     public NewsFeedFragment() {
         // Required empty public constructor
@@ -63,6 +69,7 @@ public class NewsFeedFragment extends Fragment {
 
     private void initViews() {
         getActivity().setTitle("News Feed");
+        manager = new NavigationManager(getFragmentManager());
         postContainer = new ArrayList<>();
         eventContainer = new ArrayList<>();
         routeContainer = new ArrayList<>();
@@ -127,7 +134,24 @@ public class NewsFeedFragment extends Fragment {
             postContainer.add(eventContainer.get(j++));
         }
         Collections.reverse(postContainer);
-        recyclerView.setAdapter(new ComplexRecyclerViewAdapter(postContainer,getContext()));
+        recyclerView.setAdapter(new ComplexRecyclerViewAdapter(postContainer,getContext(),this,this));
     }
 
+    @Override
+    public void onItemClick(Event event) {
+        EventDetailFragment eventDetailFragment = new EventDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("event",event);
+        eventDetailFragment.setArguments(bundle);
+        manager.switchToFragment(eventDetailFragment);
+    }
+
+    @Override
+    public void onItemClick(Route route) {
+        RouteDetailFragment routeDetailFragment = new RouteDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("route",route);
+        routeDetailFragment.setArguments(bundle);
+        manager.switchToFragment(routeDetailFragment);
+    }
 }

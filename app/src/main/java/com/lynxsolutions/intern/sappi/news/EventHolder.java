@@ -12,16 +12,16 @@ import com.lynxsolutions.intern.sappi.R;
  * Created by farkaszsombor on 03.08.2017.
  */
 
-public class ViewHolder1 extends RecyclerView.ViewHolder {
+public class EventHolder extends RecyclerView.ViewHolder {
 
     private TextView label1;
     private Button btn;
     ImageView image;
-    public ViewHolder1(View v) {
+    public EventHolder(View v) {
         super(v);
         label1 = (TextView) v.findViewById(R.id.text1);
         image = (ImageView) v.findViewById(R.id.imageView4);
-        btn = (Button) v.findViewById(R.id.button);
+        btn = (Button) v.findViewById(R.id.button_event);
     }
 
     public TextView getLabel1() {

@@ -2,25 +2,18 @@ package com.lynxsolutions.intern.sappi.profile;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.signature.StringSignature;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,9 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
-import com.lynxsolutions.intern.sappi.main.MainActivity;
-
-import java.util.ArrayList;
+import com.lynxsolutions.intern.sappi.main.NavigationManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +32,7 @@ public class ProfileFragment extends Fragment {
     private CircleImageView profilePicture;
     Button editProfileButton;
     TextView tvName;
+    private NavigationManager manager;
     private EditText etEmail, etPhone, etFacebook;
 
 
@@ -94,6 +86,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initializeViews(View view) {
+        manager = new NavigationManager(getFragmentManager());
         profilePicture = view.findViewById(R.id.fragment_profile_image);
         tvName = view.findViewById(R.id.fragment_profile_tv_name);
         etEmail = view.findViewById(R.id.fragment_profile_et_email);
@@ -103,7 +96,7 @@ public class ProfileFragment extends Fragment {
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).switchToFragment(new EditProfileFragment());
+                manager.switchToFragment(new EditProfileFragment());
             }
         });
     }

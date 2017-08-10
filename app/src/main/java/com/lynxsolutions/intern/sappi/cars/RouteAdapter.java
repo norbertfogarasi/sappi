@@ -12,9 +12,9 @@ import com.google.firebase.database.Query;
 class RouteAdapter extends FirebaseRecyclerAdapter<Route, RouteViewHolder> {
 
 
-    private final AdapterItemClickListener listener;
+    private final RouteClickListener listener;
 
-    public RouteAdapter(Class<Route> modelClass, int modelLayout, Class<RouteViewHolder> viewHolderClass, Query ref, AdapterItemClickListener listener) {
+    public RouteAdapter(Class<Route> modelClass, int modelLayout, Class<RouteViewHolder> viewHolderClass, Query ref, RouteClickListener listener) {
         super(modelClass, modelLayout, viewHolderClass, ref);
         this.listener = listener;
     }
