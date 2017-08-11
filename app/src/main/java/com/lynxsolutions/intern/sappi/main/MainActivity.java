@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.signature.StringSignature;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.cars.CarFeedFragment;
 import com.lynxsolutions.intern.sappi.events.EventFeedFragment;
@@ -170,7 +173,7 @@ public class MainActivity extends AppCompatActivity
 */
     private void addBackGroundPhotoToNavigationDrawer(){
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
         DatabaseReference reToUser= FirebaseDatabase.getInstance().getReference("users");
         reToUser.child(userId).addValueEventListener(new ValueEventListener() {
@@ -179,9 +182,9 @@ public class MainActivity extends AppCompatActivity
                 UserInfo info = dataSnapshot.getValue(UserInfo.class);
                 emailTextView.setText(info.getEmail());
                 try {
-                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().dontAnimate().diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
+                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(bgImage);
-                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().dontAnimate().diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
+                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL)
                             .bitmapTransform(new CircleTransform(MainActivity.this))
                             .into(profileImage);
                 }catch (IllegalArgumentException ex){

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.signature.StringSignature;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.main.MainActivity;
 
@@ -75,9 +78,9 @@ public class ProfileFragment extends Fragment {
                 tvName.setText(info.getName());
                 etEmail.setText(info.getEmail());
                 etPhone.setText(info.getPhonenumber());
-                try{
-                    Glide.with(getContext()).load(info.getPhoto()).diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
-                            .into(profilePicture);
+                try {
+                    Glide.with(getContext()).load(info.getPhoto()).centerCrop().into(profilePicture);
+
                 }catch (IllegalArgumentException ex){
                     ex.printStackTrace();
                 }

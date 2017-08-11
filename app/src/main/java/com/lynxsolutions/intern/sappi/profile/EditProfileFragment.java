@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.StringSignature;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +34,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.main.MainActivity;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -104,19 +107,19 @@ public class EditProfileFragment extends Fragment {
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                                    final Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                    Log.e("Test",taskSnapshot.getMetadata().getReference().toString());
+                                    final String downloadUrl = taskSnapshot.getDownloadUrl().toString();
                                     String name = tvName.getText().toString();
                                     String email = emailText.getText().toString();
                                     String phone = etPhone.getText().toString();
-                                    setIfeverythingIsCorrect(name, email, phone, info, downloadUrl.toString(), userId);
+                                    setIfeverythingIsCorrect(name, email, phone, info, downloadUrl, userId);
                                     Toast.makeText(getContext(), "Upload Done", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getContext(), "Story couldn't be posted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Image Uploading Failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -192,9 +195,8 @@ public class EditProfileFragment extends Fragment {
                 facebookName = facebookName.replace(" ", "");
                 etFacebook.setText(facebookName);
                 try {
-                    Glide.with(getContext()).load(info.getPhoto()).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
-                            .into(profilePicture);
-                } catch (IllegalArgumentException ex) {
+                    Glide.with(getContext()).load(info.getPhoto()).centerCrop().into(profilePicture);
+                }catch (IllegalArgumentException ex){
                     ex.printStackTrace();
                 }
             }
