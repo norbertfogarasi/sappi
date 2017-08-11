@@ -25,7 +25,7 @@ import com.lynxsolutions.intern.sappi.R;
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
-    private static final String PHOTO_URL = "gs://sappi-36768.appspot.com/default.png";
+    private static final String PHOTO_URL = "https://firebasestorage.googleapis.com/v0/b/sappi-ccc6a.appspot.com/o/default.png?alt=media&token=d96d92af-3eea-4aa1-bc74-239e1cdb30c6";
 
     private EditText etEmail, etPassword, etName, etPasswordConfirm, etPhoneNumber;
     private FirebaseAuth mAuth;

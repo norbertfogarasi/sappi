@@ -43,7 +43,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         initializeViews(view);
         getDataFromDatabase();
@@ -68,8 +67,7 @@ public class ProfileFragment extends Fragment {
                 etEmail.setText(info.getEmail());
                 etPhone.setText(info.getPhonenumber());
                 try{
-                    Glide.with(getContext()).load(info.getPhoto()).diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
-                            .into(profilePicture);
+                    Glide.with(getContext()).load(info.getPhoto()).into(profilePicture);
                 }catch (IllegalArgumentException ex){
                     ex.printStackTrace();
                 }
