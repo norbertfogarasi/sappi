@@ -71,8 +71,10 @@ public class ProfileFragment extends Fragment {
                 }catch (IllegalArgumentException ex){
                     ex.printStackTrace();
                 }
-                String facebbokName = "facebook.com/"+info.getName();
-                etFacebook.setText(facebbokName);
+                String facebookName = "facebook.com/" + info.getName();
+                //Removing the spaces from the name
+                facebookName = facebookName.replace(" ", "");
+                etFacebook.setText(facebookName);
             }
 
             @Override
