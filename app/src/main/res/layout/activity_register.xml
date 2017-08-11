@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/register_page_img"
-    android:theme="@style/RegisterTheme">
+    android:theme="@style/RegisterTheme"
+    android:id="@+id/container_register">
 
     <ImageView
         android:id="@+id/tvLogo"

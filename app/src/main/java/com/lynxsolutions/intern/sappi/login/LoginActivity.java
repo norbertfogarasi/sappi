@@ -38,6 +38,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
@@ -239,6 +240,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
     private boolean firebaseAuthWithEmailAndPassword() {
+        //Log.d(TAG, "firebaseAuthWithEmailAndPassword: " + user.getDisplayName());
         mAuth.signInWithEmailAndPassword(mEditTextEmail.getText().toString(), mEditTextPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -246,8 +248,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     Log.d(TAG, "signInWithEmailAndPassword: success");
                     progressBar.setProgress(100);
                     //progressBar.setVisibility(View.INVISIBLE);
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if(user != null) {
+                        if (user.isEmailVerified()) {
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
+                        }
+                        else {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            FirebaseAuth.getInstance().signOut();
+                            Snackbar.make(findViewById(R.id.login_container), R.string.err_email_not_verifyed,
+                                    Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+
                 } else {
                     Log.d(TAG, "signInWithEmailAndPassword: failure");
                 }
@@ -262,6 +276,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 if (e instanceof FirebaseAuthInvalidCredentialsException) {
                     mEditTextEmail.setError(getString(R.string.et_invalid_email_or_password));
                     mEditTextPassword.setError(getString(R.string.et_invalid_email_or_password));
+                }
+                if(e instanceof FirebaseAuthException) {
+                    Snackbar.make(findViewById(R.id.login_container), R.string.err_failed_to_log_in,
+                            Snackbar.LENGTH_LONG).show();
                 }
             }
         });

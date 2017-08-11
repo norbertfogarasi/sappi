@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "856707857749-egtv04qjaqu6v6863cito3qpgrghgb8s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lynxsolutions.intern.sappi",
+            "certificate_hash": "a8b0153b4fafb15e576a4812f950995b8c9e5439"
+          }
+        },
+        {
+          "client_id": "856707857749-e6ierirrdje5k0fo3nblu2hbnvmf067v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lynxsolutions.intern.sappi",
+            "certificate_hash": "5d3dae17f980030849208d393df36e7110c28e96"
+          }
+        },
+        {
           "client_id": "856707857749-5spkr17a3592lc5lhqnm39pmrv9dku73.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -48,15 +64,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "856707857749-cqdqjhovtpjtmt4f7sh11kl2j1mpnk6p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "856707857749-5djfikvaq7buf7n4mcdjmeo743cfnh43.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.lynxsolutions.elod.sappi"
               }
-            },
-            {
-              "client_id": "856707857749-cqdqjhovtpjtmt4f7sh11kl2j1mpnk6p.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
         },
