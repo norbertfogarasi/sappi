@@ -76,9 +76,9 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "createUserWithEmail: success");
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if (user != null) {
-                            writeNewUser(user.getUid(), etEmail.getText().toString(), etName.getText().toString(),
+                            writeNewUser(user.getUid(), user.getEmail(), etName.getText().toString(),
                                     etPhoneNumber.getText().toString(), PHOTO_URL);
                             user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             Snackbar.LENGTH_LONG).show();
                                     FirebaseAuth.getInstance().signOut();
                                     Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    i.putExtra("email", etEmail.getText().toString());
+                                    i.putExtra("email", user.getEmail());
                                     startActivity(i);
                                     finish();
                                 }
@@ -103,6 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                             });
 
                         } else {
+                            Log.d(TAG, "onComplete: null user");
                             Snackbar.make(findViewById(R.id.container_register), R.string.err_something_went_wrong,
                                     Snackbar.LENGTH_LONG).show();
                         }

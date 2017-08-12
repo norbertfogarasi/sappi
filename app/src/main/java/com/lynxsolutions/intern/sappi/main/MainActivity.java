@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,6 +39,7 @@ import com.lynxsolutions.intern.sappi.profile.UserInfo;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private NavigationView navigationView;
     private View navHeader;
     private ImageView bgImage, profileImage;
@@ -154,15 +156,20 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserInfo info = dataSnapshot.getValue(UserInfo.class);
-                emailTextView.setText(info.getEmail());
-                try {
-                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().dontAnimate().diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
-                            .into(bgImage);
-                    Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop().dontAnimate().diskCacheStrategy(DiskCacheStrategy.NONE).signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
-                            .bitmapTransform(new CircleTransform(MainActivity.this))
-                            .into(profileImage);
-                }catch (IllegalArgumentException ex){
-                    ex.printStackTrace();
+                if(info != null) {
+                    emailTextView.setText(info.getEmail());
+                    try {
+                        Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop()
+                                .into(bgImage);
+                        Glide.with(MainActivity.this).load(info.getPhoto()).centerCrop()
+                                .bitmapTransform(new CircleTransform(MainActivity.this))
+                                .into(profileImage);
+                    } catch (IllegalArgumentException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                else {
+                    Log.d(TAG, "onDataChange: info null");
                 }
             }
 
