@@ -33,6 +33,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.main.MainActivity;
+import com.lynxsolutions.intern.sappi.main.NavigationManager;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,7 @@ public class ProfileFragment extends Fragment {
 
     private CircleImageView profilePicture;
     Button editProfileButton;
+    private NavigationManager manager;
     TextView tvName;
     private EditText etEmail, etPhone, etFacebook;
 
@@ -97,6 +99,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initializeViews(View view) {
+        manager = new NavigationManager(getFragmentManager());
         profilePicture = view.findViewById(R.id.fragment_profile_image);
         tvName = view.findViewById(R.id.fragment_profile_tv_name);
         etEmail = view.findViewById(R.id.fragment_profile_et_email);
@@ -106,7 +109,7 @@ public class ProfileFragment extends Fragment {
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).switchToFragment(new EditProfileFragment());
+                manager.switchToFragment(new EditProfileFragment());
             }
         });
     }
