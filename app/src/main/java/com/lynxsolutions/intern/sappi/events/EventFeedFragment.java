@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import com.lynxsolutions.intern.sappi.R;
-import com.lynxsolutions.intern.sappi.cars.NavigationManager;
-import com.lynxsolutions.intern.sappi.cars.Route;
-import com.lynxsolutions.intern.sappi.cars.RouteDetailFragment;
+import com.lynxsolutions.intern.sappi.main.NavigationManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +60,7 @@ public class EventFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_feed, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.postsid);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressbar);
-        mAdapter = new RecyclerViewAdapter(eventList, getContext(), new EventAdapterClickListener() {
+        mAdapter = new RecyclerViewAdapter(eventList, getContext(), new EventClickListener() {
             @Override
             public void onItemClick(Event event) {
                 EventDetailFragment eventDetailFragment = new EventDetailFragment();

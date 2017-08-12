@@ -22,7 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<Event> EventList;
     private Context context;
-    private EventAdapterClickListener listener;
+    private EventClickListener listener;
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -41,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    RecyclerViewAdapter(List<Event> mQuestionList, Context context, EventAdapterClickListener listener) {
+    RecyclerViewAdapter(List<Event> mQuestionList, Context context, EventClickListener listener) {
         this.EventList = mQuestionList;
         this.context=context;
         this.listener = listener;
@@ -50,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_layout_post, parent, false);
+                .inflate(R.layout.event_holder, parent, false);
 
         return new MyViewHolder(itemView);
     }

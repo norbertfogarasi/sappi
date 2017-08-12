@@ -13,14 +13,16 @@ import com.lynxsolutions.intern.sappi.R;
  * Created by farkaszsombor on 03.08.2017.
  */
 
-public class ViewHolder2 extends RecyclerView.ViewHolder{
+public class RouteHolder extends RecyclerView.ViewHolder{
 
     private TextView from,to;
     private Button btn;
-    public ViewHolder2(View v) {
+
+    public RouteHolder(View v) {
         super(v);
         from = (TextView) v.findViewById(R.id.map_from_text);
         to = (TextView)v.findViewById(R.id.map_to_text);
+        btn = v.findViewById(R.id.button_route);
     }
 
     public TextView getFrom() {
@@ -37,5 +39,13 @@ public class ViewHolder2 extends RecyclerView.ViewHolder{
 
     public void setTo(TextView to) {
         this.to = to;
+    }
+
+    public Button getBtn() {
+        return btn;
+    }
+
+    public void setBtn(Button btn) {
+        this.btn = btn;
     }
 }

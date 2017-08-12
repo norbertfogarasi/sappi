@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.main.NavigationManager;
 import com.lynxsolutions.intern.sappi.profile.UserInfo;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -68,6 +69,7 @@ public class AddRouteFragment extends Fragment{
         } catch (InflateException e) {
 
         }
+
 
         initViews();
         setListeners();

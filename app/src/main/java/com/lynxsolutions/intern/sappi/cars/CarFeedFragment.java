@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.main.NavigationManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,8 +64,8 @@ public class CarFeedFragment extends Fragment {
             }
         });
 
-        mAdapter = new RouteAdapter(Route.class, R.layout.recycler_item, RouteViewHolder.class, mPostRef,
-                new AdapterItemClickListener() {
+        mAdapter = new RouteAdapter(Route.class, R.layout.route_holder, RouteViewHolder.class, mPostRef,
+                new RouteClickListener() {
                     @Override
                     public void onItemClick(Route route) {
                         RouteDetailFragment routeDetailFragment = new RouteDetailFragment();

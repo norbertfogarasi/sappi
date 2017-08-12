@@ -21,8 +21,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.cars.CarFeedFragment;
-import com.lynxsolutions.intern.sappi.cars.NavigationManager;
-import com.lynxsolutions.intern.sappi.main.MainActivity;
+import com.lynxsolutions.intern.sappi.main.NavigationManager;
 
 /**
  * A simple {@link Fragment} subclass.
