@@ -227,7 +227,7 @@ public class EditProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
-            Glide.with(EditProfileFragment.this.getContext()).load(filePath).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
+            Glide.with(getContext()).load(filePath).diskCacheStrategy(DiskCacheStrategy.ALL).dontAnimate()
                     .into(profilePicture);
         }
     }
