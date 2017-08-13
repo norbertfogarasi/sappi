@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.lynxsolutions.intern.sappi.events.EventDetailFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -116,6 +118,25 @@ public class NewsFeedFragment extends Fragment implements RouteClickListener, Ev
     }
 
     private void setUpAdapter() {
+
+        Collections.reverse(eventContainer);
+        Collections.reverse(routeContainer);
+
+        int i = 0,j = 0;
+
+        while(i < eventContainer.size()){
+            postContainer.add(eventContainer.get(i));
+            j = 0;
+            while(j < routeContainer.size()){
+                if(routeContainer.get(j).getTo().equals(eventContainer.get(i).getLocation())){
+                    postContainer.add(routeContainer.get(j));
+                    break;
+                }
+                j++;
+            }
+            i++;
+        }
+        /*
         int j = 0;
         int i = 0;
         while (i < routeContainer.size() && j < eventContainer.size()){
@@ -133,7 +154,7 @@ public class NewsFeedFragment extends Fragment implements RouteClickListener, Ev
         while(j < eventContainer.size()){
             postContainer.add(eventContainer.get(j++));
         }
-        Collections.reverse(postContainer);
+        Collections.reverse(postContainer);*/
         recyclerView.setAdapter(new ComplexRecyclerViewAdapter(postContainer,getContext(),this,this));
     }
 
