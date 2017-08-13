@@ -73,4 +73,7 @@
     <string name="title_cars">Cars</string>
     <string name="title_events">Events</string>
     <string name="text_submit">Submit</string>
+
+    <!--Favorites Strings-->
+    <string name="empty_fav">You don\'t have any favorites \!</string>
 </resources>

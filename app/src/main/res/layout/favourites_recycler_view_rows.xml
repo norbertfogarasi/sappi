@@ -10,12 +10,10 @@
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical">
-    <!--texts only for testing !!!!! -->
     <TextView
         android:id="@+id/title_of_favourite_event"
         android:textSize="18sp"
         android:textColor="@android:color/black"
-        android:text="Tusvanyos"
         android:paddingBottom="2dp"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
@@ -26,8 +24,10 @@
         android:layout_below="@id/title_of_favourite_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:lines="1"
+        android:ellipsize="end"
         android:textSize="16sp"
-        android:text="Jul 18-23"
         android:paddingBottom="20dp"
         android:background="@drawable/border_for_profile_textview"/>
 
