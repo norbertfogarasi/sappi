@@ -307,7 +307,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                     Log.d(TAG, "signInWithCredential:success");
                                     //Write new user to database
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    writeNewUser(user.getUid(), user.getEmail(), user.getDisplayName(), user.getPhoneNumber(), user.getPhotoUrl().toString());
+                                    String phoneNumber = user.getPhoneNumber() == null ? "" : user.getPhoneNumber();
+                                    writeNewUser(user.getUid(), user.getEmail(), user.getDisplayName(), phoneNumber, user.getPhotoUrl().toString());
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                     finish();
                                 } else {
@@ -351,7 +352,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String phoneNumber = user.getPhoneNumber() == null ? "" : user.getPhoneNumber();
-                            writeNewUser(user.getUid(), user.getEmail(), phoneNumber, user.getPhoneNumber(), user.getPhotoUrl().toString());
+                            writeNewUser(user.getUid(), user.getEmail(), user.getDisplayName(), phoneNumber, user.getPhotoUrl().toString());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         } else {

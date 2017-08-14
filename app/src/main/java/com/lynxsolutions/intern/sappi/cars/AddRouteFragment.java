@@ -144,9 +144,14 @@ public class AddRouteFragment extends Fragment{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userInfo = dataSnapshot.getValue(UserInfo.class);
-                if(userInfo.getPhonenumber().isEmpty())
+                if(user != null) {
+                    if (userInfo.getPhonenumber().isEmpty())
+                        setPhoneNumber();
+                    else sendPostToFirebase();
+                }
+                else {
                     setPhoneNumber();
-                else sendPostToFirebase();
+                }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

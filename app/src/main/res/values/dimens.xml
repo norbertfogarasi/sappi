@@ -7,7 +7,7 @@
     <dimen name="app_padding">15dp</dimen>
     <dimen name="et_hint_size">15sp</dimen>
     <dimen name="dim_going">30sp</dimen>
-    <dimen name="locations_dim">20sp</dimen>
+    <dimen name="locations_dim">16sp</dimen>
     <dimen name="locations_margin_dim">5dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
