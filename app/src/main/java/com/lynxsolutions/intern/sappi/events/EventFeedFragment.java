@@ -39,16 +39,11 @@ public class EventFeedFragment extends Fragment {
     private ProgressBar mProgressBar;
     private DatabaseReference mDatabase, db;
     private NavigationManager manager;
-
     DatabaseReference mPostRef;
-
 
     public EventFeedFragment() {
         // Required empty public constructor
     }
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +55,7 @@ public class EventFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_feed, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.postsid);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressbar);
+        //setup the adapter
         mAdapter = new RecyclerViewAdapter(eventList, getContext(), new EventClickListener() {
             @Override
             public void onItemClick(Event event) {
@@ -72,16 +68,10 @@ public class EventFeedFragment extends Fragment {
         });
         LinearLayoutManager mLayoutManager =
                 new LinearLayoutManager(getApplicationContext());
-        //layoutManager.setReverseLayout(true);
-        //layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-
-
-
-
-
+        //add scroll listener
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(mLayoutManager) {
             @Override
             public void onLoadMore(int current_page) {
@@ -91,47 +81,24 @@ public class EventFeedFragment extends Fragment {
         loadData();
         return view;
     }
-
     private void loadData() {
-
-
-
+        //read event from database
         mDatabase.child("events").orderByKey()
-
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (!dataSnapshot.hasChildren()) {
-
-
                         }
-                        int i = 0;
-
-
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
-
-
                             Event question = data.getValue(Event.class);
-
-
                             eventList.add(0, question);
-
-
                             mAdapter.notifyDataSetChanged();
-
-
                             mProgressBar.setVisibility(RecyclerView.GONE);
-
-
                         }
-
-
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         mProgressBar.setVisibility(RecyclerView.GONE);
-
                     }
                 });
 
