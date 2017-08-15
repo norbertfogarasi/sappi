@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
@@ -71,9 +72,17 @@ public class CustomFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+
+                AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                        .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES)
+                        .setCountry("RO")
+                        .build();
+
                 Intent intent = null;
                 try {
-                    intent = new PlaceAutocomplete.IntentBuilder(MODE_OVERLAY).build(getActivity());
+                    intent = new PlaceAutocomplete.IntentBuilder(MODE_OVERLAY)
+                            .setFilter(typeFilter)
+                            .build(getActivity());
                 } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
                     e.printStackTrace();
                 }

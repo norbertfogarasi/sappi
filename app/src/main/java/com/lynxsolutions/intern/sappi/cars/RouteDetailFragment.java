@@ -86,7 +86,8 @@ public class RouteDetailFragment extends Fragment {
                     public void onClick(View view) {
                         deleteFromDatabase();
                         Toast.makeText(getContext(), "Route deleted", Toast.LENGTH_SHORT).show();
-                        manager.switchToMainFragment(new CarFeedFragment());
+                        getFragmentManager().popBackStackImmediate();
+                        //manager.switchToMainFragment(new CarFeedFragment());
                     }
                 });
 
