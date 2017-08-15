@@ -49,9 +49,9 @@ public class EventDetailFragment extends Fragment {
         StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(event.getImageUrl());
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        String stamp=Long.toString(System.currentTimeMillis());
-        Event post=new Event("gs://sappi-ccc6a.appspot.com/TT20100723_204.jpg","AUG\n4","Tusvanyos 2017","9B1EwtScyFcxsznlKXNlLDlg0pm1","Lorem ipsum lorem pismum sdfsdfg" +
-                "fgsdfgdfhfgjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhgdfgdfgdf.!!!?",stamp,"Tusnad");
+        //String stamp=Long.toString(System.currentTimeMillis());
+        //Event post=new Event("gs://sappi-ccc6a.appspot.com/TT20100723_204.jpg","AUG\n4","Tusvanyos 2017","9B1EwtScyFcxsznlKXNlLDlg0pm1","Lorem ipsum lorem pismum sdfsdfg" +
+                //"fgsdfgdfhfgjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhgdfgdfgdf.!!!?",stamp,"Tusnad");
 
         //mDatabase.child("events").child(stamp).setValue(post);
 
@@ -69,6 +69,8 @@ public class EventDetailFragment extends Fragment {
             }
         });
 
+        //Like an event
+
         view.findViewById(R.id.imageView17).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +81,7 @@ public class EventDetailFragment extends Fragment {
             }
         });
 
-
+        //Load the photo
         Glide.with(this)
                 .using(new FirebaseImageLoader())
                 .load(storageReference)

@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ArrowKeyMovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ public class RouteDetailFragment extends Fragment {
     private TextView tvRouteDetail;
     private TextView tvFrom;
     private TextView tvTo;
+    private ImageView ivProfile;
     private View view;
     private Route route;
     private NavigationManager manager;
@@ -113,6 +117,7 @@ public class RouteDetailFragment extends Fragment {
         //Initializes the views
         getActivity().setTitle("Car Detail");
         manager = new NavigationManager(getFragmentManager());
+        ivProfile = view.findViewById(R.id.route_detail_profile_image);
         tvAddedBy = view.findViewById(R.id.route_detail_tv_added_by);
         tvFrom = view.findViewById(R.id.route_detail_tv_from);
         tvTo = view.findViewById(R.id.route_detail_tv_to);

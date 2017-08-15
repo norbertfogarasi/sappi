@@ -20,14 +20,13 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
 
-    private List<Event> EventList;
+    private List<Event> EventList; // list for events
     private Context context;
     private EventClickListener listener;
 
-
+    //viewholder for one event
     class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView vpicture;
-        //public TextView vdescript;
         public TextView vtitle;
         public TextView datetime;
 
@@ -35,7 +34,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public MyViewHolder(View itemView) {
             super(itemView);
             vpicture=(ImageView) itemView.findViewById(R.id.postpicture);
-            //vdescript=(TextView) itemView.findViewById(R.id.postdescription);
             vtitle=(TextView)  itemView.findViewById(R.id.posttitle);
             datetime=(TextView) itemView.findViewById(R.id.datetime);
         }
@@ -55,6 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new MyViewHolder(itemView);
     }
 
+    //fill viewholder with data
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Event question = EventList.get(position);
@@ -65,7 +64,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .into(holder.vpicture);
 
         holder.vtitle.setText(question.getTitle());
-
         holder.datetime.setText(question.getDate());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
