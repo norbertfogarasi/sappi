@@ -18,7 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/mapview" />
+            android:src="@drawable/mapview"
+            android:foreground="@drawable/trending_gradient_shape"
+            android:alpha="@android:integer/config_mediumAnimTime"/>
 
         <TextView
             android:id="@+id/map_from_text"
@@ -27,11 +29,8 @@
             android:layout_alignBaseline="@+id/button_route"
             android:layout_alignBottom="@+id/button_route"
             android:layout_alignParentStart="true"
-            android:gravity="center_vertical"
             android:paddingStart="20dp"
-            android:textAppearance="?android:attr/textAppearanceListItemSmall"
-            android:textColor="@android:color/white"
-            android:textSize="25sp" />
+            style="@style/card_text_style" />
 
         <TextView
             android:id="@+id/map_to_text"
@@ -39,11 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/button_route"
             android:layout_alignParentStart="true"
-            android:gravity="center_vertical"
             android:paddingStart="20dp"
-            android:textAppearance="?android:attr/textAppearanceListItemSmall"
-            android:textColor="@android:color/white"
-            android:textSize="25sp" />
+            style="@style/card_text_style"/>
 
         <Button
             android:id="@+id/button_route"

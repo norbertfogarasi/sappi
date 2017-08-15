@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.main.MainActivity;
 import com.lynxsolutions.intern.sappi.main.NavigationManager;
 
 /**
@@ -33,7 +34,7 @@ public class CarFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_car_feed, container, false);
 
         initializeScreen(view);
-        // sendPostToFirebase();
+
 
         return view;
     }
@@ -46,6 +47,9 @@ public class CarFeedFragment extends Fragment {
 
     private void initializeScreen(View view) {
         getActivity().setTitle("Car Feed");
+
+
+
         mRecyclerView = view.findViewById(R.id.recycler_view2);
         mPostRef = FirebaseDatabase.getInstance().getReference("cars");
 
