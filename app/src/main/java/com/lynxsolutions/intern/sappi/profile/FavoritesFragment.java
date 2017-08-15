@@ -23,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lynxsolutions.intern.sappi.R;
 import com.lynxsolutions.intern.sappi.events.Event;
+import com.lynxsolutions.intern.sappi.events.EventDetailFragment;
+import com.lynxsolutions.intern.sappi.main.NavigationManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,9 +84,19 @@ public class FavoritesFragment extends Fragment {
                 firebaseDatabase
         ) {
             @Override
-            protected void populateViewHolder(FavoritesViewHolder viewHolder, Event model, int position) {
+            protected void populateViewHolder(FavoritesViewHolder viewHolder, final Event model, int position) {
                 viewHolder.eventNameText.setText(model.getTitle());
                 viewHolder.eventDescriptionText.setText(model.getDescription());
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        EventDetailFragment eventDetailFragment = new EventDetailFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("event",model);
+                        eventDetailFragment.setArguments(bundle);
+                        new NavigationManager(getFragmentManager()).switchToFragment(eventDetailFragment);
+                    }
+                });
             }
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter);
