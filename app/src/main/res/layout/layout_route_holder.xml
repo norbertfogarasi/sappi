@@ -53,7 +53,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="20dp"
-            android:background="#78009f"
+            android:background="@drawable/button_purple_background"
             android:minHeight="30dp"
             android:minWidth="60dp"
             android:text="More"

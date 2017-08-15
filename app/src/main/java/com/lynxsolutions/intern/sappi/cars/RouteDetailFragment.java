@@ -11,6 +11,7 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class RouteDetailFragment extends Fragment {
     private TextView tvFrom;
     private TextView tvTo;
     private TextView tvPhone;
+    private ImageView ivProfile;
     private View view;
     private Route route;
 
@@ -85,6 +87,7 @@ public class RouteDetailFragment extends Fragment {
     private void initViews() {
         //Initializes the views
         getActivity().setTitle("Car Detail");
+        ivProfile = view.findViewById(R.id.route_detail_profile_image);
         tvAddedBy = view.findViewById(R.id.route_detail_tv_added_by);
         tvFrom = view.findViewById(R.id.route_detail_tv_from);
         tvTo = view.findViewById(R.id.route_detail_tv_to);

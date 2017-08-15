@@ -3,7 +3,6 @@ package com.lynxsolutions.intern.sappi.login;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -45,14 +44,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.lynxsolutions.intern.sappi.main.MainActivity;
 import com.lynxsolutions.intern.sappi.R;
+import com.lynxsolutions.intern.sappi.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
-    private int progressStatus = 1;
 
     private EditText mEditTextEmail, mEditTextPassword;
     private Button mLoginButton;
