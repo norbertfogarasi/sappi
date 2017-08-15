@@ -2,18 +2,18 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    cardCornerRadius="4dp"
-    cardElevation="4dp"
+    cardCornerRadius="2dp"
+    cardElevation="2dp"
     android:layout_width="match_parent"
     android:layout_height="220dp"
-    android:layout_margin="8dp">
+    android:layout_margin="4dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/search_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -39,7 +39,7 @@
             android:text="From"
             android:textSize="@dimen/locations_dim"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/search_tv" />
 
         <TextView
             android:id="@+id/from_tv"
@@ -51,12 +51,13 @@
             android:text="innnen"
             android:textSize="@dimen/locations_dim"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toRightOf="@+id/imageView"
+            app:layout_constraintLeft_toRightOf="@+id/icon_image"
             app:layout_constraintRight_toLeftOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintTop_toTopOf="@+id/icon_image" />
+
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/icon_image"
             android:layout_width="15dp"
             android:layout_height="27dp"
             android:layout_marginLeft="4dp"

@@ -26,6 +26,10 @@ public class NavigationManager {
     }
 
     public void switchToMainFragment(Fragment fragment) {
+
+        for(int i = 0; i < manager.getBackStackEntryCount(); ++i) {
+            manager.popBackStack();
+        }
         manager.beginTransaction().replace(R.id.content, fragment).commit();
 
     }

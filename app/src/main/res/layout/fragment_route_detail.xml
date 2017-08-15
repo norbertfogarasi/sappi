@@ -16,148 +16,147 @@
             android:layout_height="match_parent"
             android:fillViewport="true">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/route_detail_profile_image"
-                android:layout_width="59dp"
-                android:layout_height="66dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+                <ImageView
+                    android:id="@+id/route_detail_profile_image"
+                    android:layout_width="59dp"
+                    android:layout_height="66dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
 
-            <TextView
-                android:id="@+id/route_detail_tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:scrollbars="vertical"
-                android:text="My Destination"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/car_detail_textview_size"
-                app:layout_constraintLeft_toRightOf="@+id/route_detail_profile_image"
-                app:layout_constraintTop_toTopOf="@+id/route_detail_profile_image" />
+                <TextView
+                    android:id="@+id/route_detail_tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:scrollbars="vertical"
+                    android:text="My Destination"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/car_detail_textview_size"
+                    app:layout_constraintLeft_toRightOf="@+id/route_detail_profile_image"
+                    app:layout_constraintTop_toTopOf="@+id/route_detail_profile_image" />
 
-            <TextView
-                android:id="@+id/route_detail_tv_added_by"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="Added by "
-                android:textSize="@dimen/car_detail_textview_size"
-                app:layout_constraintBottom_toBottomOf="@+id/route_detail_profile_image"
-                app:layout_constraintLeft_toRightOf="@+id/route_detail_profile_image"
-                app:layout_constraintTop_toBottomOf="@+id/route_detail_tv_name" />
+                <TextView
+                    android:id="@+id/route_detail_tv_added_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Added by "
+                    android:textSize="@dimen/car_detail_textview_size"
+                    app:layout_constraintBottom_toBottomOf="@+id/route_detail_profile_image"
+                    app:layout_constraintLeft_toRightOf="@+id/route_detail_profile_image"
+                    app:layout_constraintTop_toBottomOf="@+id/route_detail_tv_name" />
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/route_detail_profile_image"
-                app:srcCompat="@mipmap/map" />
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/route_detail_profile_image"
+                    app:srcCompat="@mipmap/map" />
 
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="47dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="From"
-                android:textSize="@dimen/car_detail_textview_size"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="47dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="From"
+                    android:textSize="@dimen/car_detail_textview_size"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toRightOf="@+id/textView5"
-                app:layout_constraintTop_toTopOf="@+id/textView5"
-                app:srcCompat="@drawable/ic_location_on_black_24dp" />
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="@+id/textView5"
+                    app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toRightOf="@+id/textView13"
-                app:layout_constraintTop_toTopOf="@+id/textView13"
-                app:srcCompat="@drawable/ic_from_black_24dp" />
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/textView13"
+                    app:layout_constraintTop_toTopOf="@+id/textView13"
+                    app:srcCompat="@drawable/ic_from_black_24dp" />
 
-            <TextView
-                android:id="@+id/route_detail_tv_from"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:maxLines="1"
-                android:textSize="@dimen/car_detail_textview_size"
-                app:layout_constraintLeft_toRightOf="@+id/imageView6"
-                app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                <TextView
+                    android:id="@+id/route_detail_tv_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:maxLines="1"
+                    android:textSize="@dimen/car_detail_textview_size"
+                    app:layout_constraintLeft_toRightOf="@+id/imageView6"
+                    app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:textSize="@dimen/car_detail_textview_size"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toRightOf="@+id/route_detail_tv_from"
-                app:layout_constraintTop_toTopOf="@+id/route_detail_tv_from" />
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="@dimen/car_detail_textview_size"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@+id/route_detail_tv_from"
+                    app:layout_constraintTop_toTopOf="@+id/route_detail_tv_from" />
 
-            <TextView
-                android:id="@+id/route_detail_tv_to"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:maxLines="1"
-                android:textSize="@dimen/car_detail_textview_size"
-                app:layout_constraintLeft_toRightOf="@+id/imageView9"
-                app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                <TextView
+                    android:id="@+id/route_detail_tv_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:maxLines="1"
+                    android:textSize="@dimen/car_detail_textview_size"
+                    app:layout_constraintLeft_toRightOf="@+id/imageView9"
+                    app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
-            <TextView
-                android:id="@+id/route_detail_tv_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:padding="8dp"
-                android:clickable="true"
-                android:textSize="@dimen/car_detail_textview_size"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                <TextView
+                    android:id="@+id/route_detail_tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:textSize="@dimen/car_detail_textview_size"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
-            <TextView
-                android:id="@+id/route_detail_tv_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="PHONE"
-                android:textColor="@drawable/clickable_textview"
-                android:textSize="@dimen/tv_text_size"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginTop="32dp"
-                app:layout_constraintTop_toBottomOf="@+id/route_detail_tv_description" />
+                <TextView
+                    android:id="@+id/route_detail_tv_phone_or_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@drawable/clickable_textview"
+                    android:textSize="@dimen/tv_text_size"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/route_detail_tv_description" />
 
-        </android.support.constraint.ConstraintLayout>
+            </android.support.constraint.ConstraintLayout>
         </ScrollView>
 
     </android.support.v7.widget.CardView>

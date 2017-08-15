@@ -33,7 +33,7 @@ public class CarFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_car_feed, container, false);
 
         initializeScreen(view);
-       // sendPostToFirebase();
+        // sendPostToFirebase();
 
         return view;
     }

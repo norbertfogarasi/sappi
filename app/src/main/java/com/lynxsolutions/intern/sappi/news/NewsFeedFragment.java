@@ -80,7 +80,7 @@ public class NewsFeedFragment extends Fragment implements RouteClickListener, Ev
         databaseReferenceForEvents = FirebaseDatabase.getInstance().getReference("events");
         getDatabaseReferenceForCars = FirebaseDatabase.getInstance().getReference("cars");
         recyclerView = view.findViewById(R.id.recycler_view);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
     }
 
@@ -119,24 +119,6 @@ public class NewsFeedFragment extends Fragment implements RouteClickListener, Ev
 
     private void setUpAdapter() {
 
-        Collections.reverse(eventContainer);
-        Collections.reverse(routeContainer);
-
-        int i = 0,j = 0;
-
-        while(i < eventContainer.size()){
-            postContainer.add(eventContainer.get(i));
-            j = 0;
-            while(j < routeContainer.size()){
-                if(routeContainer.get(j).getTo().equals(eventContainer.get(i).getLocation())){
-                    postContainer.add(routeContainer.get(j));
-                    break;
-                }
-                j++;
-            }
-            i++;
-        }
-        /*
         int j = 0;
         int i = 0;
         while (i < routeContainer.size() && j < eventContainer.size()){
@@ -154,7 +136,8 @@ public class NewsFeedFragment extends Fragment implements RouteClickListener, Ev
         while(j < eventContainer.size()){
             postContainer.add(eventContainer.get(j++));
         }
-        Collections.reverse(postContainer);*/
+
+        Collections.reverse(postContainer);
         recyclerView.setAdapter(new ComplexRecyclerViewAdapter(postContainer,getContext(),this,this));
     }
 

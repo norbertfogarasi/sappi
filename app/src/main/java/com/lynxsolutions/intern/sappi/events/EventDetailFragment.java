@@ -65,7 +65,7 @@ public class EventDetailFragment extends Fragment {
         view.findViewById(R.id.textView16).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                manager.switchToFragment(new CarFeedFragment());
+                manager.switchToMainFragment(new CarFeedFragment());
             }
         });
 
@@ -75,10 +75,9 @@ public class EventDetailFragment extends Fragment {
                 FirebaseUser user = mAuth.getCurrentUser();
                 String uId = user.getUid();
                 mDatabase.child("favorites").child(uId).child(event.getTimestamp()).setValue(event);
-                Toast.makeText(getContext(),event.getTitle()+" "+"is liked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Added to favorites",Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         Glide.with(this)

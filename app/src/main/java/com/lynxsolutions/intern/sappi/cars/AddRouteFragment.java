@@ -2,8 +2,10 @@ package com.lynxsolutions.intern.sappi.cars;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.text.InputType;
 import android.util.Log;
 import android.view.InflateException;
@@ -11,14 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,15 +39,19 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.app.Activity.RESULT_OK;
+import static com.google.android.gms.location.places.ui.PlaceAutocomplete.MODE_OVERLAY;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 
 public class AddRouteFragment extends Fragment{
 
+    public static final int REQUEST_CODE = 1;
     private static final String TAG = "AddFragment";
-    private PlaceAutocompleteFragment autocompleteFrom;
-    private PlaceAutocompleteFragment autocompleteTo;
+    private CustomFragment autocompleteFrom;
+    private CustomFragment autocompleteTo;
     private Place placeFrom;
     private Place placeTo;
     private UserInfo userInfo;
@@ -49,10 +59,18 @@ public class AddRouteFragment extends Fragment{
     private DatabaseReference mRef;
     private NavigationManager manager;
     private EditText description;
-    private static View view;
+    private View view;
 
     public AddRouteFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (autocompleteFrom != null)
+            getFragmentManager().beginTransaction().remove(autocompleteFrom).commit();
     }
 
     @Override
@@ -67,9 +85,8 @@ public class AddRouteFragment extends Fragment{
         try {
             view = inflater.inflate(R.layout.fragment_add_route, container, false);
         } catch (InflateException e) {
-
+            e.printStackTrace();
         }
-
 
         initViews();
         setListeners();
@@ -118,13 +135,20 @@ public class AddRouteFragment extends Fragment{
         manager = new NavigationManager(getFragmentManager());
         user = FirebaseAuth.getInstance().getCurrentUser();
         mRef = FirebaseDatabase.getInstance().getReference("users");
-        autocompleteFrom = (PlaceAutocompleteFragment)
-                getActivity().getFragmentManager().findFragmentById(R.id.place_autocomplete_from);
-        autocompleteTo = (PlaceAutocompleteFragment)
-                getActivity().getFragmentManager().findFragmentById(R.id.place_autocomplete_to);
-        setIconsAndTexts();
-    }
 
+        autocompleteFrom = new CustomFragment();
+
+        getChildFragmentManager().beginTransaction().add(R.id.linearLayout, autocompleteFrom,"fromFragment").commit();
+        autocompleteFrom.setHint("Your location");
+        autocompleteFrom.setIcon(R.drawable.ic_from_black_24dp);
+
+        autocompleteTo = new CustomFragment();
+
+        getChildFragmentManager().beginTransaction().add(R.id.linearLayout2, autocompleteTo,"toFragment").commit();
+        autocompleteTo.setHint("Choose destination");
+        autocompleteTo.setIcon(R.drawable.ic_location_on_black_24dp);
+
+    }
 
     private boolean fieldsAreSetCorrectly(){
         boolean ok = true;
@@ -144,9 +168,14 @@ public class AddRouteFragment extends Fragment{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userInfo = dataSnapshot.getValue(UserInfo.class);
-                if(userInfo.getPhonenumber().isEmpty())
+                if(user != null) {
+                    if (userInfo.getPhonenumber().isEmpty())
+                        setPhoneNumber();
+                    else sendPostToFirebase();
+                }
+                else {
                     setPhoneNumber();
-                else sendPostToFirebase();
+                }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -202,7 +231,10 @@ public class AddRouteFragment extends Fragment{
     }
 
     private void setIconsAndTexts() {
-        ImageView fromIcon = (ImageView)((LinearLayout)autocompleteFrom.getView()).getChildAt(0);
+
+
+
+       /* ImageView fromIcon = (ImageView)((LinearLayout)autocompleteFrom.getView()).getChildAt(0);
         TextView fromText = (TextView)((LinearLayout) autocompleteFrom.getView()).getChildAt(1);
         fromText.setHint("From");
         fromIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_my_location_black_24dp));
@@ -210,7 +242,7 @@ public class AddRouteFragment extends Fragment{
         TextView toText = (TextView)((LinearLayout) autocompleteTo.getView()).getChildAt(1);
         toText.setHint("To");
         ImageView toIcon = (ImageView)((LinearLayout)autocompleteTo.getView()).getChildAt(0);
-        toIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_location_on_black_24dp));
+        toIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_location_on_black_24dp));*/
     }
 
 
