@@ -77,6 +77,9 @@
             android:drawableStart="@drawable/email_icon"
             android:textStyle="italic"
             android:inputType="textEmailAddress"
+            android:minLines="1"
+            android:maxLines="1"
+            android:drawablePadding="5dp"
             app:layout_constraintLeft_toLeftOf="@+id/guideline14"
             app:layout_constraintRight_toLeftOf="@+id/guideline13"
             app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_tv_name" />
@@ -91,6 +94,9 @@
             android:drawableStart="@drawable/smartphone_icon"
             android:hint="@string/et_no_phone_hint"
             android:inputType="phone"
+            android:minLines="1"
+            android:maxLines="1"
+            android:drawablePadding="5dp"
             app:layout_constraintLeft_toLeftOf="@+id/guideline14"
             app:layout_constraintRight_toLeftOf="@+id/guideline13"
             app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_et_email" />
@@ -104,6 +110,10 @@
             android:layout_marginTop="8dp"
             android:drawableStart="@drawable/facebook_icon"
             android:textStyle="italic"
+            android:inputType="text"
+            android:minLines="1"
+            android:maxLines="1"
+            android:drawablePadding="5dp"
             app:layout_constraintLeft_toLeftOf="@+id/guideline14"
             app:layout_constraintRight_toLeftOf="@+id/guideline13"
             app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_et_phone" />

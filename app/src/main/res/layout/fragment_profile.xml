@@ -79,6 +79,9 @@
             android:focusable="false"
             android:longClickable="false"
             android:textStyle="italic"
+            android:inputType="textEmailAddress"
+            android:minLines="1"
+            android:maxLines="1"
             app:layout_constraintLeft_toLeftOf="@+id/guideline11"
             app:layout_constraintRight_toLeftOf="@+id/guideline10"
             app:layout_constraintTop_toBottomOf="@+id/fragment_profile_tv_name" />
@@ -95,6 +98,9 @@
             android:focusable="false"
             android:hint="@string/et_no_phone_hint"
             android:longClickable="false"
+            android:inputType="phone"
+            android:minLines="1"
+            android:maxLines="1"
             app:layout_constraintLeft_toLeftOf="@+id/guideline11"
             app:layout_constraintRight_toLeftOf="@+id/guideline10"
             app:layout_constraintTop_toBottomOf="@+id/fragment_profile_et_email" />
@@ -111,6 +117,9 @@
             android:focusable="false"
             android:longClickable="false"
             android:textStyle="italic"
+            android:inputType="text"
+            android:minLines="1"
+            android:maxLines="1"
             app:layout_constraintLeft_toLeftOf="@+id/guideline11"
             app:layout_constraintRight_toLeftOf="@+id/guideline10"
             app:layout_constraintTop_toBottomOf="@+id/fragment_profile_et_phone" />
